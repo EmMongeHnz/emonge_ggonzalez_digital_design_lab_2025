@@ -21,5 +21,21 @@ Finalmente, como el problema propuesto es un restador de 4 bits, se propone cone
 
 ## Problema 3: ##
 
+**Propuesta 1:**  Para la solución de este problema se utilizan 4 un flip-flops con respuesta en bajada conectados en cascada, los cuales van a almacenar un bus de datos de N bits. El primer flip-flop responde a los impulsos del reloj y el resto responden al impulso del anterior, Generando así el contador y dejando la siguiente tabla de verdad:
+
+| Q0 | Q1 | Q2 | Q3 | CLR |
+|:--:|:--:|:--:|:--:|:---:|
+| 0  | 0  | 0  | 0  |  1  |
+| 0  | 0  | 0  | 1  |  1  |
+| 0  | 0  | 1  | 0  |  1  |
+| 0  | 1  | 1  | 1  |  1  |
+| 1  | 1  | 0  | 0  |  1  |
+| 1  | 1  | 0  | 1  |  1  |
+| 1  | 0  | 1  | 0  |  1  |
+| 1  | 0  | 1  | 1  |  1  |
+| 0  | 0  | 0  | 0  |  1  |
+| 0  | 1  | 0  | 1  |  1  |
+| ...  | ...  | ...  | ...  |  0  |
+
 
 
