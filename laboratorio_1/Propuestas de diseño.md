@@ -36,6 +36,21 @@ Al obtener los minterminos y realizar las operaciones correspondientes podemos v
 
 Finalmente, como el problema propuesto es un restador de 4 bits, se propone conectar 4 restadores de 1 bit en cascada.
 
+**Propuesta 2:** Para implementar un restador completo de 4 bits se parte de la idea de que una resta puede realizarse como una suma en complemento a dos: $A - B = A + (\overline{B} + 1)$.
+
+1. **Inversión de B:** Se aplica un inversor bit a bit a la entrada B para obtener `B'`.
+2. **Suma de +1:** Se utiliza un sumador de 4 bits (construido a partir de 4 full adders de 1 bit) para calcular `B' + 1`, generando así el complemento a dos de B.
+3. **Suma final:** Se conecta otro sumador de 4 bits que recibe como entradas `A` y `(B' + 1)`. El resultado corresponde a la operación `A - B`.
+
+De esta forma, el diseño estructural se basa en:
+
+* **Full adder de 1 bit** como bloque básico.
+* **Sumador de 4 bits** construido en cascada a partir de 4 full adders.
+* **Inversores** para generar `B'`.
+
+Finalmente, para obtener el restador de 4 bits se conectan los bloques descritos en cascada, asegurando que las señales de acarreo se propaguen correctamente. El resultado de la operación se entrega en la salida `Z[3:0]`, y se puede incluir la señal de **carry/borrow** y **overflow** para diagnóstico en caso de representar números con signo.
+
+
 ## Problema 3:
 
 **Propuesta 1:**  Para la solución de este problema se utilizan 4 un flip-flops con respuesta en bajada conectados en cascada, los cuales van a almacenar un bus de datos de N bits. El primer flip-flop responde a los impulsos del reloj y el resto responden al impulso del anterior, Generando así el contador y dejando la siguiente tabla de verdad:
