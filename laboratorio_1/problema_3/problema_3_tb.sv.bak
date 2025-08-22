@@ -1,0 +1,3 @@
+module problema_3_tb;
+	parameter N = 8;
+	logic strt,  

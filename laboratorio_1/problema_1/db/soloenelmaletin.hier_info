@@ -1,0 +1,22 @@
+|problema_1
+a[0] => z.IN0
+a[1] => z.IN0
+a[1] => z.IN1
+a[2] => z.IN0
+a[2] => z.IN1
+a[3] => ShiftLeft0.IN17
+a[3] => z.IN1
+a[3] => z[3].DATAIN
+z[0] << z.DB_MAX_OUTPUT_PORT_TYPE
+z[1] << z.DB_MAX_OUTPUT_PORT_TYPE
+z[2] << z.DB_MAX_OUTPUT_PORT_TYPE
+z[3] << a[3].DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[0] << seg_g.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[1] << seg_f.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[2] << seg_e.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[3] << seg_d.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[4] << seg_c.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[5] << seg_b.DB_MAX_OUTPUT_PORT_TYPE
+seg_abcd[6] << seg_a.DB_MAX_OUTPUT_PORT_TYPE
+
+

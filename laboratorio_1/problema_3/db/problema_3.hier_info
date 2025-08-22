@@ -1,0 +1,69 @@
+|problema_3
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+strt[0] => q[0]~reg0.ADATA
+strt[1] => q[1]~reg0.ADATA
+strt[2] => q[2]~reg0.ADATA
+strt[3] => q[3]~reg0.ADATA
+strt[4] => q[4]~reg0.ADATA
+strt[5] => q[5]~reg0.ADATA
+reset => q[0]~reg0.ALOAD
+reset => q[1]~reg0.ALOAD
+reset => q[2]~reg0.ALOAD
+reset => q[3]~reg0.ALOAD
+reset => q[4]~reg0.ALOAD
+reset => q[5]~reg0.ALOAD
+q[0] <= q[0].DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1].DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2].DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3].DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4].DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5].DB_MAX_OUTPUT_PORT_TYPE
+seg_h[0] <= display7seg:_seg_h.segments
+seg_h[1] <= display7seg:_seg_h.segments
+seg_h[2] <= display7seg:_seg_h.segments
+seg_h[3] <= display7seg:_seg_h.segments
+seg_h[4] <= display7seg:_seg_h.segments
+seg_h[5] <= display7seg:_seg_h.segments
+seg_h[6] <= display7seg:_seg_h.segments
+seg_l[0] <= display7seg:_seg_l.segments
+seg_l[1] <= display7seg:_seg_l.segments
+seg_l[2] <= display7seg:_seg_l.segments
+seg_l[3] <= display7seg:_seg_l.segments
+seg_l[4] <= display7seg:_seg_l.segments
+seg_l[5] <= display7seg:_seg_l.segments
+seg_l[6] <= display7seg:_seg_l.segments
+
+
+|problema_3|display7seg:_seg_h
+digit[0] => seg_lut.RADDR
+digit[1] => seg_lut.RADDR1
+digit[2] => seg_lut.RADDR2
+digit[3] => seg_lut.RADDR3
+segments[0] <= seg_lut.DATAOUT
+segments[1] <= seg_lut.DATAOUT1
+segments[2] <= seg_lut.DATAOUT2
+segments[3] <= seg_lut.DATAOUT3
+segments[4] <= seg_lut.DATAOUT4
+segments[5] <= seg_lut.DATAOUT5
+segments[6] <= seg_lut.DATAOUT6
+
+
+|problema_3|display7seg:_seg_l
+digit[0] => seg_lut.RADDR
+digit[1] => seg_lut.RADDR1
+digit[2] => seg_lut.RADDR2
+digit[3] => seg_lut.RADDR3
+segments[0] <= seg_lut.DATAOUT
+segments[1] <= seg_lut.DATAOUT1
+segments[2] <= seg_lut.DATAOUT2
+segments[3] <= seg_lut.DATAOUT3
+segments[4] <= seg_lut.DATAOUT4
+segments[5] <= seg_lut.DATAOUT5
+segments[6] <= seg_lut.DATAOUT6
+
+

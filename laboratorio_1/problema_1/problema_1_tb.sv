@@ -1,0 +1,22 @@
+// problema_1_tb.sv
+`timescale 1ns/1ps
+module problema_1_tb;
+  logic [3:0] a;  // binario de entrada
+  logic [3:0] z;  // salida Gray
+
+  // Instancia tu módulo (definido en problema_1_with_hex_fpga.sv)
+  problema_1 dut (
+    .a(a),
+    .z(z)
+  );
+
+  initial begin
+    $display("  Binario (a)   Gray (z)   Hex(z)");
+    for (int i = 0; i < 16; i++) begin
+      a = i[3:0];
+      #1; // deja propagar la lógica combinacional
+      $display("     %04b        %04b       %1h", a, z, z);
+    end
+    $finish;
+  end
+endmodule

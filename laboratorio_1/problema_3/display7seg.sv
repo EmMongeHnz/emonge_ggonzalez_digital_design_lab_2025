@@ -1,0 +1,27 @@
+module display7seg (
+    input  logic [3:0] digit,   
+    output logic [6:0] segments
+);
+    logic [6:0] seg_lut [0:15];
+
+    initial begin
+        seg_lut[0]  = 7'b1111110;
+        seg_lut[1]  = 7'b0110000;
+        seg_lut[2]  = 7'b1101101;
+        seg_lut[3]  = 7'b1111001;
+        seg_lut[4]  = 7'b0110011;
+        seg_lut[5]  = 7'b1011011;
+        seg_lut[6]  = 7'b1011111;
+        seg_lut[7]  = 7'b1110000;
+        seg_lut[8]  = 7'b1111111;
+        seg_lut[9]  = 7'b1111011;
+        seg_lut[10] = 7'b1110111;
+        seg_lut[11] = 7'b0011111;
+        seg_lut[12] = 7'b1001110;
+        seg_lut[13] = 7'b0111101;
+        seg_lut[14] = 7'b1001111;
+        seg_lut[15] = 7'b1000111;
+    end
+
+    assign segments = ~seg_lut[digit];
+endmodule
