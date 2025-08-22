@@ -12,9 +12,10 @@
 
 
 4. **Investigue sobre los actuales modelos de FPGA utilizados en las industrias.**
-Actualmente, los modelos de FPGA más utilizados en la industria provienen de AMD (Xilinx) con sus familias Virtex, Kintex, Artix, Spartan y Zynq, muy populares por cubrir desde aplicaciones de bajo costo y consumo hasta sistemas de alto rendimiento e integración con procesadores ARM. Intel Agilex destaca en centros de datos y telecomunicaciones por su gran capacidad de procesamiento y flexibilidad, mientras que Lattice es preferida en IoT y dispositivos de borde por su eficiencia energética. Finalmente, Microchip/Actel con sus PolarFire e IGLOO son comunes en aeroespacial y defensa por su fiabilidad y tolerancia a entornos extremos.
+
+    Actualmente, los modelos de FPGA más utilizados en la industria provienen de AMD (Xilinx) con sus familias Virtex, Kintex, Artix, Spartan y Zynq, muy populares por cubrir desde aplicaciones de bajo costo y consumo hasta sistemas de alto rendimiento e integración con procesadores ARM. Intel Agilex destaca en centros de datos y telecomunicaciones por su gran capacidad de procesamiento y flexibilidad, mientras que Lattice es preferida en IoT y dispositivos de borde por su eficiencia energética. Finalmente, Microchip/Actel con sus PolarFire e IGLOO son comunes en aeroespacial y defensa por su fiabilidad y tolerancia a entornos extremos.
 
 
 5. **Investigue sobre cuáles son las aplicaciones más comunes en la industria que tienen las FPGA.**
 
-En la actualidad las FPGA son utilizadas para el procesamiento de señales digitales (DSP), principalmente en telecomunicaciones y aplicaciones de imagen y video. Otro uso común es la aceleración de computo, se utilizan como aceleradores de hardware en varios centros de datos (Azure, Amazon, AWS). En sistemas criticos como lo pueden ser aeroespaciales y de defensa, cumplen un rol importante pues se pueden reprogramar tras su fabricación, aumentando su vida util.
+    En la actualidad las FPGA son utilizadas para el procesamiento de señales digitales (DSP), principalmente en telecomunicaciones y aplicaciones de imagen y video. Otro uso común es la aceleración de computo, se utilizan como aceleradores de hardware en varios centros de datos (Azure, Amazon, AWS). En sistemas criticos como lo pueden ser aeroespaciales y de defensa, cumplen un rol importante pues se pueden reprogramar tras su fabricación, aumentando su vida util.
