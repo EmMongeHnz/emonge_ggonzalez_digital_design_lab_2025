@@ -1,0 +1,132 @@
+|problema_2
+A1[0] => restador:FS0.A
+A1[0] => hex7seg:segA.N[0]
+A1[1] => restador:FS1.A
+A1[1] => hex7seg:segA.N[1]
+A1[2] => restador:FS2.A
+A1[2] => hex7seg:segA.N[2]
+A1[3] => restador:FS3.A
+A1[3] => hex7seg:segA.N[3]
+B1[0] => restador:FS0.B
+B1[0] => hex7seg:segB.N[0]
+B1[1] => restador:FS1.B
+B1[1] => hex7seg:segB.N[1]
+B1[2] => restador:FS2.B
+B1[2] => hex7seg:segB.N[2]
+B1[3] => restador:FS3.B
+B1[3] => hex7seg:segB.N[3]
+Cin1 => restador:FS0.Cin
+Cout1 << restador:FS3.Cout
+Y1[0] << restador:FS0.Y
+Y1[1] << restador:FS1.Y
+Y1[2] << restador:FS2.Y
+Y1[3] << restador:FS3.Y
+HEX_A[0] << hex7seg:segA.SEG[0]
+HEX_A[1] << hex7seg:segA.SEG[1]
+HEX_A[2] << hex7seg:segA.SEG[2]
+HEX_A[3] << hex7seg:segA.SEG[3]
+HEX_A[4] << hex7seg:segA.SEG[4]
+HEX_A[5] << hex7seg:segA.SEG[5]
+HEX_A[6] << hex7seg:segA.SEG[6]
+HEX_B[0] << hex7seg:segB.SEG[0]
+HEX_B[1] << hex7seg:segB.SEG[1]
+HEX_B[2] << hex7seg:segB.SEG[2]
+HEX_B[3] << hex7seg:segB.SEG[3]
+HEX_B[4] << hex7seg:segB.SEG[4]
+HEX_B[5] << hex7seg:segB.SEG[5]
+HEX_B[6] << hex7seg:segB.SEG[6]
+HEX[0] << hex7seg:segY.SEG[0]
+HEX[1] << hex7seg:segY.SEG[1]
+HEX[2] << hex7seg:segY.SEG[2]
+HEX[3] << hex7seg:segY.SEG[3]
+HEX[4] << hex7seg:segY.SEG[4]
+HEX[5] << hex7seg:segY.SEG[5]
+HEX[6] << hex7seg:segY.SEG[6]
+
+
+|problema_2|restador:FS0
+A => Y.IN0
+A => Cout.IN0
+B => Y.IN1
+B => Cout.IN1
+Cin => Y.IN1
+Cin => Cout.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|restador:FS1
+A => Y.IN0
+A => Cout.IN0
+B => Y.IN1
+B => Cout.IN1
+Cin => Y.IN1
+Cin => Cout.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|restador:FS2
+A => Y.IN0
+A => Cout.IN0
+B => Y.IN1
+B => Cout.IN1
+Cin => Y.IN1
+Cin => Cout.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|restador:FS3
+A => Y.IN0
+A => Cout.IN0
+B => Y.IN1
+B => Cout.IN1
+Cin => Y.IN1
+Cin => Cout.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|hex7seg:segA
+N[0] => ShiftLeft0.IN20
+N[1] => ShiftLeft0.IN19
+N[2] => ShiftLeft0.IN18
+N[3] => ShiftLeft0.IN17
+SEG[0] <= seg_a.DB_MAX_OUTPUT_PORT_TYPE
+SEG[1] <= seg_b.DB_MAX_OUTPUT_PORT_TYPE
+SEG[2] <= seg_c.DB_MAX_OUTPUT_PORT_TYPE
+SEG[3] <= seg_d.DB_MAX_OUTPUT_PORT_TYPE
+SEG[4] <= seg_e.DB_MAX_OUTPUT_PORT_TYPE
+SEG[5] <= seg_f.DB_MAX_OUTPUT_PORT_TYPE
+SEG[6] <= seg_g.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|hex7seg:segB
+N[0] => ShiftLeft0.IN20
+N[1] => ShiftLeft0.IN19
+N[2] => ShiftLeft0.IN18
+N[3] => ShiftLeft0.IN17
+SEG[0] <= seg_a.DB_MAX_OUTPUT_PORT_TYPE
+SEG[1] <= seg_b.DB_MAX_OUTPUT_PORT_TYPE
+SEG[2] <= seg_c.DB_MAX_OUTPUT_PORT_TYPE
+SEG[3] <= seg_d.DB_MAX_OUTPUT_PORT_TYPE
+SEG[4] <= seg_e.DB_MAX_OUTPUT_PORT_TYPE
+SEG[5] <= seg_f.DB_MAX_OUTPUT_PORT_TYPE
+SEG[6] <= seg_g.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|problema_2|hex7seg:segY
+N[0] => ShiftLeft0.IN20
+N[1] => ShiftLeft0.IN19
+N[2] => ShiftLeft0.IN18
+N[3] => ShiftLeft0.IN17
+SEG[0] <= seg_a.DB_MAX_OUTPUT_PORT_TYPE
+SEG[1] <= seg_b.DB_MAX_OUTPUT_PORT_TYPE
+SEG[2] <= seg_c.DB_MAX_OUTPUT_PORT_TYPE
+SEG[3] <= seg_d.DB_MAX_OUTPUT_PORT_TYPE
+SEG[4] <= seg_e.DB_MAX_OUTPUT_PORT_TYPE
+SEG[5] <= seg_f.DB_MAX_OUTPUT_PORT_TYPE
+SEG[6] <= seg_g.DB_MAX_OUTPUT_PORT_TYPE
+
+

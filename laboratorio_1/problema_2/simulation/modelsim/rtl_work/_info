@@ -1,0 +1,179 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/TallerDigital/problema_2/simulation/modelsim
+Ehex7seg
+Z1 w1755784747
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 2
+R0
+Z5 8C:/TallerDigital/problema_2/hex7seg.vhd
+Z6 FC:/TallerDigital/problema_2/hex7seg.vhd
+l0
+L6 1
+VnSSB==<FUVfE^fOAL3O[93
+!s100 kBg^:[ZZY1Lk64da@n0^E1
+Z7 OV;C;2020.1;71
+31
+Z8 !s110 1755822386
+!i10b 1
+Z9 !s108 1755822386.000000
+Z10 !s90 -reportprogress|300|-93|-work|work|C:/TallerDigital/problema_2/hex7seg.vhd|
+Z11 !s107 C:/TallerDigital/problema_2/hex7seg.vhd|
+!i113 1
+Z12 o-93 -work work
+Z13 tExplicit 1 CvgOpt 0
+Artl
+R2
+R3
+R4
+DEx4 work 7 hex7seg 0 22 nSSB==<FUVfE^fOAL3O[93
+!i122 2
+l20
+L16 29
+V[kIN_WSf9bn4VhImW8a;e2
+!s100 L4gK?>Z]eCTORT0h[[8OF2
+R7
+31
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eproblema_2
+Z14 w1755784741
+R2
+R3
+R4
+!i122 0
+R0
+Z15 8C:/TallerDigital/problema_2/problema_2.vhd
+Z16 FC:/TallerDigital/problema_2/problema_2.vhd
+l0
+L6 1
+VhZ4I;?J7obi:`Hl:dnB`j1
+!s100 C4Q[[Ho=bX3DlQh:hzcmm0
+R7
+31
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-93|-work|work|C:/TallerDigital/problema_2/problema_2.vhd|
+Z18 !s107 C:/TallerDigital/problema_2/problema_2.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R2
+R3
+R4
+DEx4 work 10 problema_2 0 22 hZ4I;?J7obi:`Hl:dnB`j1
+!i122 0
+l35
+L22 28
+VTD?lmhCEBLgfZ^BQ_PzY;0
+!s100 >Ez><d`eRUC14XKF9N[d>3
+R7
+31
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
+Eproblema_2_tb
+Z19 w1755779040
+R3
+R4
+!i122 3
+R0
+Z20 8C:/TallerDigital/problema_2/problema_2_tb.vhd
+Z21 FC:/TallerDigital/problema_2/problema_2_tb.vhd
+l0
+L4 1
+VI^L=IDRhzR8]jJJlTJY7_0
+!s100 azP0JPPJM87=GBCYKE5lZ0
+R7
+31
+R8
+!i10b 1
+R9
+Z22 !s90 -reportprogress|300|-93|-work|work|C:/TallerDigital/problema_2/problema_2_tb.vhd|
+!s107 C:/TallerDigital/problema_2/problema_2_tb.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R3
+R4
+DEx4 work 13 problema_2_tb 0 22 I^L=IDRhzR8]jJJlTJY7_0
+!i122 3
+l25
+L7 50
+V3;^7ha?ogUg>IA`j7KUOi1
+!s100 9IQ1S1OcgRIO>8_b9gYPA3
+R7
+31
+R8
+!i10b 1
+R9
+R22
+Z23 !s107 C:/TallerDigital/problema_2/problema_2_tb.vhd|
+!i113 1
+R12
+R13
+Erestador
+Z24 w1755779115
+R3
+R4
+!i122 1
+R0
+Z25 8C:/TallerDigital/problema_2/restador.vhd
+Z26 FC:/TallerDigital/problema_2/restador.vhd
+l0
+L4 1
+VSiE5aNA0Scb9F6cRZQEH22
+!s100 N;:7LF^mjE_NKCn5@I1kD1
+R7
+31
+R8
+!i10b 1
+R9
+Z27 !s90 -reportprogress|300|-93|-work|work|C:/TallerDigital/problema_2/restador.vhd|
+Z28 !s107 C:/TallerDigital/problema_2/restador.vhd|
+!i113 1
+R12
+R13
+Artl
+R3
+R4
+DEx4 work 8 restador 0 22 SiE5aNA0Scb9F6cRZQEH22
+!i122 1
+l15
+L14 5
+V5V47NWA9<z^?E`eeLBMmF2
+!s100 M4;kP>zFYfo4nWf26A[mh3
+R7
+31
+R8
+!i10b 1
+R9
+R27
+R28
+!i113 1
+R12
+R13

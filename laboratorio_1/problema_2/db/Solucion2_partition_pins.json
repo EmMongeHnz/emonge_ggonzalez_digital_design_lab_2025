@@ -1,0 +1,149 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Cout1",
+					"strict" : false
+				},
+				{
+					"name" : "Y1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Y1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Y1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Y1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_A[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX_B[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX[6]",
+					"strict" : false
+				},
+				{
+					"name" : "A1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "B1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "A1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "B1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "A1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "B1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "A1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "B1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Cin1",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
