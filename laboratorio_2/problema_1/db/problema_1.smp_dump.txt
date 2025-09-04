@@ -1,0 +1,6 @@
+
+State Machine - |top_calculadora|op_mul_seq:u_mul|state
+Name state.IDLE state.FINISH state.RUN 
+state.IDLE 0 0 0 
+state.RUN 1 0 1 
+state.FINISH 1 1 0 
