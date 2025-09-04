@@ -65,6 +65,11 @@ Para el diseño de la resta se parte del concepto matemático de la misma, utili
 ![](imgs/cap.png)
 
 ### Multiplicación
+Para el caso de la multiplicación se parte de la definición de la misma, la cual establece que la multiplicación es la suma repetida de un mismo número. Por lo tanto se aprovecha el modulo de suma implementado previamente para usarla en cascada un numero determinado de veces, tomando el resultado de la suma anterior como el sumando "A" y el sumando "B" es el numero original. En el siguiente diagrama se muestra el funcionamiento con una cascada, este proceso se repite "n" veces según sea el caso.
+
+![](imgs/summul.png)
+
+
 
 ## Propuesta 2
 
