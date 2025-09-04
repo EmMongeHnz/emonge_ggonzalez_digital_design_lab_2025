@@ -1,0 +1,70 @@
+// problema_1.sv
+// Top de ALU parametrizable que INSTANTCIA sumador y restador y multiplexa sus salidas.
+// FLAGS = {Z, N, C, V}
+
+module problema_1 #(
+  parameter int N = 4
+) (
+  input  logic [N-1:0] A,
+  input  logic [N-1:0] B,
+  input  logic         CIN_BIN,   // Como Cin para suma / Bin (borrow-in) para resta
+  input  logic  [1:0]  OP,        // 2'b00 = ADD, 2'b01 = SUB (otros => 0)
+  output logic [N-1:0] Y,
+  output logic  [3:0]  FLAGS      // {Z,N,C,V}
+);
+
+  // Señales internas de SUMA
+  logic [N-1:0] y_add;
+  logic         z_add, n_add, c_add, v_add;
+  logic         cout_add;
+
+  // Señales internas de RESTA
+  logic [N-1:0] y_sub;
+  logic         z_sub, n_sub, c_sub, v_sub;
+  logic         bout_sub; // borrow-out (informativo)
+
+  // Instancia SUMADOR
+  sumador #(.N(N)) u_add (
+    .A   (A),
+    .B   (B),
+    .Cin (CIN_BIN),
+    .Y   (y_add),
+    .Cout(cout_add),
+    .Z   (z_add),
+    .Nf  (n_add),
+    .V   (v_add),
+    .C   (c_add)
+  );
+
+  // Instancia RESTADOR
+  restador #(.N(N)) u_sub (
+    .A   (A),
+    .B   (B),
+    .Bin (CIN_BIN),
+    .Y   (y_sub),
+    .Bout(bout_sub),
+    .Z   (z_sub),
+    .Nf  (n_sub),
+    .V   (v_sub),
+    .C   (c_sub) // Nota: aquí C = ~Borrow (carry-out de A + ~B + ~Bin)
+  );
+
+  // MUX por operación
+  always_comb begin
+    unique case (OP)
+      2'b00: begin // ADD
+        Y     = y_add;
+        FLAGS = {z_add, n_add, c_add, v_add};
+      end
+      2'b01: begin // SUB
+        Y     = y_sub;
+        FLAGS = {z_sub, n_sub, c_sub, v_sub}; // C = ~Borrow
+      end
+      default: begin
+        Y     = '0;
+        FLAGS = 4'b0;
+      end
+    endcase
+  end
+
+endmodule

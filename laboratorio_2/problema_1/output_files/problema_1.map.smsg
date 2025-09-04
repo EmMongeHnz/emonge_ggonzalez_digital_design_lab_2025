@@ -1,0 +1,2 @@
+Info (10281): Verilog HDL Declaration information at suma.sv(17): object "C" differs only in case from object "c" in the same scope File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv Line: 17
+Info (10281): Verilog HDL Declaration information at restador.sv(11): object "B" differs only in case from object "b" in the same scope File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv Line: 11
