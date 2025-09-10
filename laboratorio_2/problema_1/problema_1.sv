@@ -1,13 +1,10 @@
-// ======================================================================
-// ALU núcleo (renombrada): alu_core  —  interfaz igual a tu problema_1
-// ======================================================================
 module alu_core #(
-  parameter int N = 4
+  parameter int N = 16
 ) (
   input  logic [N-1:0] A,
   input  logic [N-1:0] B,
   input  logic         CIN_BIN,
-  input  logic  [3:0]  OP,     // 0 ADD, 1 SUB, 2 MUL, 3 DIV, 4 MOD, 5 AND, 6 OR, 7 XOR, 8 SLL, 9 SRL
+  input  logic  [3:0]  OP,    
   output logic [N-1:0] Y,
   output logic  [3:0]  FLAGS
 );
@@ -62,10 +59,7 @@ module alu_core #(
   end
 endmodule
 
-// ======================================================================
-// TOP PARA FPGA (este es el Top-Level que verás en Pin Planner)
-//  - invoca: btn_onepulse (externo), hex7seg_sv (externo), alu_core (arriba)
-// ======================================================================
+
 module problema_1 #(
   parameter int N = 4,
   parameter bit ACTIVE_LOW_7SEG = 1,
@@ -73,22 +67,21 @@ module problema_1 #(
 )(
   input  logic                 clk,
   input  logic                 rst_n,
-  input  logic                 btn_next,         // alterna operación mostrada
+  input  logic                 btn_next,         
   input  logic [N-1:0]         sw_a,
   input  logic [N-1:0]         sw_b,
-  output logic [6:0]           HEX_A,            // g f e d c b a
+  output logic [6:0]           HEX_A,           
   output logic [6:0]           HEX_B,
   output logic [6:0]           HEX_Y,
-  output logic [3:0]           LED_FLAGS,        // {Z,N,C,V}
-  output logic [3:0]           LED_OP            // código de operación actual
+  output logic [3:0]           LED_FLAGS,       
+  output logic [3:0]           LED_OP            
 );
-  // --- botón: debounce + pulso ---
+
   logic next_pulse;
   btn_onepulse #(.CLK_HZ(CLK_HZ), .DEBOUNCE_MS(10)) u_btn (
     .clk(clk), .rst_n(rst_n), .btn_in(btn_next), .pulse(next_pulse)
   );
 
-  // --- contador de operación (0..9) ---
   localparam int NUM_OPS = 10;
   logic [3:0] op_sel;
   always_ff @(posedge clk or negedge rst_n) begin
@@ -97,20 +90,20 @@ module problema_1 #(
   end
   assign LED_OP = op_sel;
 
-  // --- instancia ALU núcleo ---
+
   logic [N-1:0] y;
   logic [3:0]   flags;
   alu_core #(.N(N)) u_alu (
     .A(sw_a),
     .B(sw_b),
-    .CIN_BIN(1'b0),   // si quieres, mapea otro switch aquí
+    .CIN_BIN(1'b0),   
     .OP(op_sel),
     .Y(y),
     .FLAGS(flags)
   );
   assign LED_FLAGS = flags;
 
-  // --- 7-seg (nibble bajo) ---
+
   hex7seg_sv #(.ACTIVE_LOW_7SEG(ACTIVE_LOW_7SEG)) u_hex_a (.nibble(sw_a[3:0]), .seg(HEX_A));
   hex7seg_sv #(.ACTIVE_LOW_7SEG(ACTIVE_LOW_7SEG)) u_hex_b (.nibble(sw_b[3:0]), .seg(HEX_B));
   hex7seg_sv #(.ACTIVE_LOW_7SEG(ACTIVE_LOW_7SEG)) u_hex_y (.nibble(y[3:0]),    .seg(HEX_Y));

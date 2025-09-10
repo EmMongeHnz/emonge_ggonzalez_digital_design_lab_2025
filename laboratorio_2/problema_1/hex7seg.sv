@@ -1,11 +1,10 @@
-// hex7seg_sv.sv  -- gfedcba, por defecto activo en bajo
 module hex7seg_sv #(
   parameter bit ACTIVE_LOW_7SEG = 1
 )(
   input  logic [3:0] nibble,
   output logic [6:0] seg  // g f e d c b a
 );
-  // Tabla típica "activa en bajo" (DE-series) para 0..F (gfedcba)
+
   logic [6:0] lo;
   always_comb begin
     unique case (nibble)

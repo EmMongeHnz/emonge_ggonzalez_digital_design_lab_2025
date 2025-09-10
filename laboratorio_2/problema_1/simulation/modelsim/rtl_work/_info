@@ -11,7 +11,7 @@ cModel Technology
 Z0 dC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/simulation/modelsim
 valu_core
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1756932205
+Z2 !s110 1757465991
 !i10b 1
 !s100 ld[XHB9BkEGXf0KFK<5:02
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -28,7 +28,7 @@ Z8 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z9 !s108 1756932205.000000
+Z9 !s108 1757465991.000000
 Z10 !s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv|
 Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv|
 !i113 1
@@ -37,7 +37,7 @@ Z13 !s92 -sv -work work +incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonza
 Z14 tCvgOpt 0
 vbtn_onepulse
 R1
-Z15 !s110 1756932206
+Z15 !s110 1757465992
 !i10b 1
 !s100 ^i25I7[DG`i@OzYWOJcIK0
 R3
@@ -54,7 +54,7 @@ R8
 r1
 !s85 0
 31
-Z16 !s108 1756932206.000000
+Z16 !s108 1757465992.000000
 !s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv|
 !i113 1
@@ -141,7 +141,7 @@ R13
 R14
 vmultiplicador_sumas
 R1
-R15
+R2
 !i10b 1
 !s100 ><?ATSkM9jQZQ6Kb?2AOF1
 R3
@@ -158,7 +158,7 @@ R8
 r1
 !s85 0
 31
-R16
+R9
 !s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv|
 !i113 1
@@ -253,7 +253,7 @@ IP>4o<293>WO;NE2AQLNQX2
 R4
 S1
 R0
-w1756932177
+w1757465714
 8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv
 FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv
 !i122 8

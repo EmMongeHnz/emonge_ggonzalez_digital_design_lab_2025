@@ -1,5 +1,5 @@
 Assembler report for problema_1
-Wed Sep  3 20:31:48 2025
+Tue Sep  9 19:39:40 2025
 Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Sep  3 20:31:48 2025 ;
+; Assembler Status      ; Successful - Tue Sep  9 19:39:40 2025 ;
 ; Revision Name         ; problema_1                            ;
 ; Top-level Entity Name ; problema_1                            ;
 ; Family                ; Cyclone V                             ;
@@ -67,8 +67,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 ; Option         ; Setting                                                                                                                                   ;
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00B28FEE                                                                                                                                ;
-; Checksum       ; 0x00B28FEE                                                                                                                                ;
+; JTAG usercode  ; 0x00B29249                                                                                                                                ;
+; Checksum       ; 0x00B29249                                                                                                                                ;
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -78,14 +78,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
-    Info: Processing started: Wed Sep  3 20:31:43 2025
+    Info: Processing started: Tue Sep  9 19:39:36 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off problema_1 -c problema_1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 5238 megabytes
-    Info: Processing ended: Wed Sep  3 20:31:48 2025
-    Info: Elapsed time: 00:00:05
+    Info: Processing ended: Tue Sep  9 19:39:40 2025
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:05
 
 

@@ -1,0 +1,101 @@
+// problema_2.sv
+// Wrapper sintetizable para medir Fmáx de la ALU: FFs -> ALU (combin.) -> FFs
+// Cambia el parámetro N según el ancho que debas evaluar (2,4,8,16,32).
+
+module problema_2 #(
+  parameter int N = 4,                // ancho de datos
+  parameter bit USE_INTERNAL_STIM = 1 // 1: genera patrones internos si no conectas ext_*
+)(
+  input  logic             clk,       // reloj de la FPGA/proyecto
+  input  logic             rst_n,     // reset activo en bajo
+  input  logic             en_load,   // carga nuevos datos en FFs de entrada
+  input  logic [3:0]       op_code,   // código de operación para la ALU
+
+  // Estímulos externos opcionales (si USE_INTERNAL_STIM=0 o deseas forzarlos)
+  input  logic [N-1:0]     ext_a,
+  input  logic [N-1:0]     ext_b,
+
+  // Salidas registradas
+  output logic [N-1:0]     y_q,
+  output logic [3:0]       flags_q
+);
+
+  // =========================
+  //  Generación de estímulos
+  // =========================
+  logic [N-1:0] a_next, b_next;
+  logic [N-1:0] a_pat,  b_pat;
+
+  // Patrones internos simples (contador + LFSR) para “activar” rutas
+  if (USE_INTERNAL_STIM) begin : GEN_PAT
+    // Contador lineal para A
+    always_ff @(posedge clk or negedge rst_n) begin
+      if (!rst_n) a_pat <= '0;
+      else if (en_load) a_pat <= a_pat + N'(1);
+    end
+
+    // LFSR para B (polinomio simple; ajusta taps si quieres algo más fuerte)
+    logic feedback;
+    always_comb begin
+      // taps: bit 0 ^ bit 1 ^ bit 3 ^ bit 4 (ejemplo; si N<5 usa los MSBs disponibles)
+      feedback = a_pat[0] ^ a_pat[1] ^ a_pat[3 % N] ^ a_pat[4 % N];
+    end
+    always_ff @(posedge clk or negedge rst_n) begin
+      if (!rst_n) b_pat <= '1;               // semilla no nula
+      else if (en_load) b_pat <= {b_pat[N-2:0], feedback};
+    end
+
+    assign a_next = a_pat;
+    assign b_next = b_pat;
+  end else begin : GEN_EXT
+    assign a_next = ext_a;
+    assign b_next = ext_b;
+  end
+
+  // ==================================
+  //  FFs de entrada hacia la ALU (A,B)
+  // ==================================
+  (* keep = "true" *) logic [N-1:0] a_q, b_q;
+
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      a_q <= '0;
+      b_q <= '0;
+    end else if (en_load) begin
+      a_q <= a_next;
+      b_q <= b_next;
+    end
+  end
+
+  // =========================
+  //  Lógica combinacional ALU
+  // =========================
+  logic [N-1:0] y_d;
+  logic [3:0]   flags_d;
+
+  // --- AJUSTA AQUÍ SI TU MÓDULO DE ALU TIENE OTRO NOMBRE O PUERTOS ---
+  // Asumido: module alu #(parameter N)(input [N-1:0] A,B, input [3:0] OP,
+  //                                 output [N-1:0] Y, output [3:0] FLAGS);
+  alu #(.N(N)) DUT (
+    .A   (a_q),
+    .B   (b_q),
+    .OP  (op_code),
+    .Y   (y_d),
+    .FLAGS(flags_d)
+  );
+  // --------------------------------------------------------------------
+
+  // =========================
+  //  FFs de salida (Y,FLAGS)
+  // =========================
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      y_q     <= '0;
+      flags_q <= '0;
+    end else begin
+      y_q     <= y_d;
+      flags_q <= flags_d;
+    end
+  end
+
+endmodule

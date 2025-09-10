@@ -1,5 +1,5 @@
 Analysis & Synthesis report for problema_1
-Wed Sep  3 20:31:15 2025
+Tue Sep  9 19:39:09 2025
 Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 
 
@@ -70,7 +70,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Sep  3 20:31:15 2025          ;
+; Analysis & Synthesis Status     ; Successful - Tue Sep  9 19:39:09 2025          ;
 ; Quartus Prime Version           ; 22.1std.0 Build 915 10/25/2022 SC Lite Edition ;
 ; Revision Name                   ; problema_1                                     ;
 ; Top-level Entity Name           ; problema_1                                     ;
@@ -654,44 +654,46 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
-    Info: Processing started: Wed Sep  3 20:31:08 2025
+    Info: Processing started: Tue Sep  9 19:39:02 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off problema_1 -c problema_1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 2 design units, including 2 entities, in source file problema_1.sv
-    Info (12023): Found entity 1: alu_core File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 4
-    Info (12023): Found entity 2: problema_1 File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 69
+    Info (12023): Found entity 1: alu_core File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 1
+    Info (12023): Found entity 2: problema_1 File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 63
 Info (12021): Found 1 design units, including 1 entities, in source file suma.sv
-    Info (12023): Found entity 1: sumador File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv Line: 5
+    Info (12023): Found entity 1: sumador File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file restador.sv
-    Info (12023): Found entity 1: restador File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv Line: 7
+    Info (12023): Found entity 1: restador File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file tb_problema_1.sv
-    Info (12023): Found entity 1: tb_problema_1 File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv Line: 4
+    Info (12023): Found entity 1: tb_problema_1 File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file multiplicador.sv
-    Info (12023): Found entity 1: multiplicador_sumas File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv Line: 5
+    Info (12023): Found entity 1: multiplicador_sumas File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file div_mod.sv
-    Info (12023): Found entity 1: div_mod File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 4
+    Info (12023): Found entity 1: div_mod File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file logic_ops.sv
-    Info (12023): Found entity 1: logic_ops File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv Line: 3
+    Info (12023): Found entity 1: logic_ops File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file hex7seg.sv
-    Info (12023): Found entity 1: hex7seg_sv File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv Line: 2
+    Info (12023): Found entity 1: hex7seg_sv File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file btn_onepulse.sv
-    Info (12023): Found entity 1: btn_onepulse File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv Line: 2
+    Info (12023): Found entity 1: btn_onepulse File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file problema_2.sv
+    Info (12023): Found entity 1: problema_2 File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_2.sv Line: 2
 Info (12127): Elaborating entity "problema_1" for the top level hierarchy
-Info (12128): Elaborating entity "btn_onepulse" for hierarchy "btn_onepulse:u_btn" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 89
-Info (12128): Elaborating entity "alu_core" for hierarchy "alu_core:u_alu" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 110
-Info (12128): Elaborating entity "sumador" for hierarchy "alu_core:u_alu|sumador:u_add" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 25
-Info (12128): Elaborating entity "restador" for hierarchy "alu_core:u_alu|restador:u_sub" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 28
-Info (12128): Elaborating entity "multiplicador_sumas" for hierarchy "alu_core:u_alu|multiplicador_sumas:u_mul" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 32
-Info (12128): Elaborating entity "sumador" for hierarchy "alu_core:u_alu|multiplicador_sumas:u_mul|sumador:GEN_MUL[0].u_add_i" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv Line: 33
-Info (12128): Elaborating entity "div_mod" for hierarchy "alu_core:u_alu|div_mod:u_divmod" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 41
-Info (12128): Elaborating entity "logic_ops" for hierarchy "alu_core:u_alu|logic_ops:u_logic" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 45
-Info (12128): Elaborating entity "hex7seg_sv" for hierarchy "hex7seg_sv:u_hex_a" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 114
+Info (12128): Elaborating entity "btn_onepulse" for hierarchy "btn_onepulse:u_btn" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 83
+Info (12128): Elaborating entity "alu_core" for hierarchy "alu_core:u_alu" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 103
+Info (12128): Elaborating entity "sumador" for hierarchy "alu_core:u_alu|sumador:u_add" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 22
+Info (12128): Elaborating entity "restador" for hierarchy "alu_core:u_alu|restador:u_sub" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 25
+Info (12128): Elaborating entity "multiplicador_sumas" for hierarchy "alu_core:u_alu|multiplicador_sumas:u_mul" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 29
+Info (12128): Elaborating entity "sumador" for hierarchy "alu_core:u_alu|multiplicador_sumas:u_mul|sumador:GEN_MUL[0].u_add_i" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv Line: 26
+Info (12128): Elaborating entity "div_mod" for hierarchy "alu_core:u_alu|div_mod:u_divmod" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 38
+Info (12128): Elaborating entity "logic_ops" for hierarchy "alu_core:u_alu|logic_ops:u_logic" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 42
+Info (12128): Elaborating entity "hex7seg_sv" for hierarchy "hex7seg_sv:u_hex_a" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv Line: 107
 Info (278001): Inferred 2 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "alu_core:u_alu|div_mod:u_divmod|Div0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 14
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "alu_core:u_alu|div_mod:u_divmod|Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 15
-Info (12130): Elaborated megafunction instantiation "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Div0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 14
-Info (12133): Instantiated megafunction "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Div0" with the following parameter: File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 14
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "alu_core:u_alu|div_mod:u_divmod|Div0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 11
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "alu_core:u_alu|div_mod:u_divmod|Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 12
+Info (12130): Elaborated megafunction instantiation "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Div0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 11
+Info (12133): Instantiated megafunction "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Div0" with the following parameter: File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 11
     Info (12134): Parameter "LPM_WIDTHN" = "4"
     Info (12134): Parameter "LPM_WIDTHD" = "4"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -702,8 +704,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/sign
     Info (12023): Found entity 1: sign_div_unsign_7kh File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/db/sign_div_unsign_7kh.tdf Line: 25
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_kse.tdf
     Info (12023): Found entity 1: alt_u_div_kse File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/db/alt_u_div_kse.tdf Line: 23
-Info (12130): Elaborated megafunction instantiation "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 15
-Info (12133): Instantiated megafunction "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Mod0" with the following parameter: File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 15
+Info (12130): Elaborated megafunction instantiation "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 12
+Info (12133): Instantiated megafunction "alu_core:u_alu|div_mod:u_divmod|lpm_divide:Mod0" with the following parameter: File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv Line: 12
     Info (12134): Parameter "LPM_WIDTHN" = "4"
     Info (12134): Parameter "LPM_WIDTHD" = "4"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -719,10 +721,10 @@ Info (21057): Implemented 212 device resources after synthesis - the final resou
     Info (21059): Implemented 29 output pins
     Info (21061): Implemented 172 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4857 megabytes
-    Info: Processing ended: Wed Sep  3 20:31:15 2025
+    Info: Peak virtual memory: 4873 megabytes
+    Info: Processing ended: Tue Sep  9 19:39:09 2025
     Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:15
+    Info: Total CPU time (on all processors): 00:00:16
 
 
 +------------------------------------------+

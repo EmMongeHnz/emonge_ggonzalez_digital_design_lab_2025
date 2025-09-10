@@ -71,9 +71,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE div_mod.sv
 set_global_assignment -name SYSTEMVERILOG_FILE logic_ops.sv
 set_global_assignment -name SYSTEMVERILOG_FILE hex7seg.sv
 set_global_assignment -name SYSTEMVERILOG_FILE btn_onepulse.sv
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_AH22 -to HEX_A[6]
 set_location_assignment PIN_AF23 -to HEX_A[5]
 set_location_assignment PIN_AG23 -to HEX_A[4]
@@ -110,4 +107,9 @@ set_location_assignment PIN_AA24 -to LED_FLAGS[3]
 set_location_assignment PIN_AB23 -to LED_FLAGS[2]
 set_location_assignment PIN_AC23 -to LED_FLAGS[1]
 set_location_assignment PIN_AD24 -to LED_FLAGS[0]
+set_global_assignment -name SYSTEMVERILOG_FILE problema_2.sv
+set_global_assignment -name SDC_FILE clock.sdc
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
