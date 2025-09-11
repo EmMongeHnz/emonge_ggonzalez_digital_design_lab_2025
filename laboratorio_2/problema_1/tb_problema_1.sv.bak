@@ -1,0 +1,81 @@
+// tb_problema_1.sv
+`timescale 1ns/1ps
+
+module tb_problema_1;
+
+  // --------- DUT #1: N = 4 ---------
+  localparam int N4 = 4;
+  logic [N4-1:0] A4, B4;
+  logic          CINBIN4;
+  logic [1:0]    OP4;
+  logic [N4-1:0] Y4;
+  logic [3:0]    FLAGS4;
+
+  problema_1 #(.N(N4)) DUT4 (
+    .A(A4), .B(B4), .CIN_BIN(CINBIN4), .OP(OP4), .Y(Y4), .FLAGS(FLAGS4)
+  );
+
+  // --------- DUT #2: N = 6 ---------
+  localparam int N6 = 6;
+  logic [N6-1:0] A6, B6;
+  logic          CINBIN6;
+  logic [1:0]    OP6;
+  logic [N6-1:0] Y6;
+  logic [3:0]    FLAGS6;
+
+  problema_1 #(.N(N6)) DUT6 (
+    .A(A6), .B(B6), .CIN_BIN(CINBIN6), .OP(OP6), .Y(Y6), .FLAGS(FLAGS6)
+  );
+
+  function string fstr(input logic [3:0] F);
+    return $sformatf("Z=%0d N=%0d C=%0d V=%0d", F[3], F[2], F[1], F[0]);
+  endfunction
+
+  task do_add4(input logic [N4-1:0] a, b, input logic cin);
+    A4=a; B4=b; CINBIN4=cin; OP4=2'b00; #1;
+    $display("[N=4][ADD] A=0x%h  B=0x%h  Cin=%0d  -> Y=0x%h  %s",
+             a, b, cin, Y4, fstr(FLAGS4));
+  endtask
+
+  task do_sub4(input logic [N4-1:0] a, b, input logic bin);
+    A4=a; B4=b; CINBIN4=bin; OP4=2'b01; #1;
+    $display("[N=4][SUB] A=0x%h  B=0x%h  Bin=%0d -> Y=0x%h  %s",
+             a, b, bin, Y4, fstr(FLAGS4));
+  endtask
+
+  task do_add6(input logic [N6-1:0] a, b, input logic cin);
+    A6=a; B6=b; CINBIN6=cin; OP6=2'b00; #1;
+    $display("[N=6][ADD] A=0x%h  B=0x%h  Cin=%0d  -> Y=0x%h  %s",
+             a, b, cin, Y6, fstr(FLAGS6));
+  endtask
+
+  task do_sub6(input logic [N6-1:0] a, b, input logic bin);
+    A6=a; B6=b; CINBIN6=bin; OP6=2'b01; #1;
+    $display("[N=6][SUB] A=0x%h  B=0x%h  Bin=%0d -> Y=0x%h  %s",
+             a, b, bin, Y6, fstr(FLAGS6));
+  endtask
+
+  initial begin
+    $display("=== Test problema_1 (FLAGS={Z,N,C,V}) ===");
+
+    // -------- N=4: SUMAS (incluye overflow) --------
+    do_add4(4'h5, 4'h3, 1'b0);  // 5 + 3 = 8, sin overflow
+    do_add4(4'h7, 4'h2, 1'b0);  // 7 + 2 -> V=1 en 4 bits firmados
+
+    // -------- N=4: RESTAS (incluye borrow y zero) ----
+    do_sub4(4'h5, 4'h5, 1'b0);  // 5 - 5 = 0  -> Z=1
+    do_sub4(4'h3, 4'h7, 1'b0);  // 3 - 7 -> borrow => C=0, N=1
+
+    // -------- N=6: SUMAS (incluye overflow) ----------
+    do_add6(6'h0A, 6'h03, 1'b0); // 10 + 3 = 13
+    do_add6(6'h1F, 6'h05, 1'b0); // 31 + 5 -> V=1 en 6 bits firmados
+
+    // -------- N=6: RESTAS (incluye borrow y zero) ----
+    do_sub6(6'h0F, 6'h0F, 1'b0); // 15 - 15 = 0 -> Z=1
+    do_sub6(6'h00, 6'h01, 1'b0); // 0 - 1  -> borrow => C=0, N=1
+
+    $display("=== Fin de prueba ===");
+    #5 $finish;
+  end
+
+endmodule
