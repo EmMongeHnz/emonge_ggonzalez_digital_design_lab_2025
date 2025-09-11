@@ -1,0 +1,271 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/simulation/modelsim
+valu_core
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1757465991
+!i10b 1
+!s100 ld[XHB9BkEGXf0KFK<5:02
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IL<bIfX]iX[NcEWciERXdS3
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+Z5 w1756931727
+Z6 8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv
+Z7 FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv
+!i122 0
+L0 4 60
+Z8 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z9 !s108 1757465991.000000
+Z10 !s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv|
+Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/problema_1.sv|
+!i113 1
+Z12 o-sv -work work
+Z13 !s92 -sv -work work +incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1
+Z14 tCvgOpt 0
+vbtn_onepulse
+R1
+Z15 !s110 1757465992
+!i10b 1
+!s100 ^i25I7[DG`i@OzYWOJcIK0
+R3
+I60E`biUKLg:j[1HjZ1P543
+R4
+S1
+R0
+w1756929220
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv
+!i122 7
+L0 2 44
+R8
+r1
+!s85 0
+31
+Z16 !s108 1757465992.000000
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/btn_onepulse.sv|
+!i113 1
+R12
+R13
+R14
+vdiv_mod
+R1
+R15
+!i10b 1
+!s100 @c2<ZY`6h3h`Az7:V8NJS3
+R3
+I0P67H<OcInm_:gNoL<<5@1
+R4
+S1
+R0
+w1756879399
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv
+!i122 4
+L0 4 13
+R8
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/div_mod.sv|
+!i113 1
+R12
+R13
+R14
+vhex7seg_sv
+R1
+R15
+!i10b 1
+!s100 `G3JMOIE1B=J@4DK0iAQQ3
+R3
+Ie^0h42078CPUoKMH^i<je0
+R4
+S1
+R0
+w1756929179
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv
+!i122 6
+L0 2 31
+R8
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/hex7seg.sv|
+!i113 1
+R12
+R13
+R14
+vlogic_ops
+R1
+R15
+!i10b 1
+!s100 KjibSOnJcB0]j0lhUDK1e3
+R3
+IUUMg9D`A>JPj?QX:0WUR=1
+R4
+S1
+R0
+w1756879658
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv
+!i122 5
+L0 3 23
+R8
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/logic_ops.sv|
+!i113 1
+R12
+R13
+R14
+vmultiplicador_sumas
+R1
+R2
+!i10b 1
+!s100 ><?ATSkM9jQZQ6Kb?2AOF1
+R3
+IHkHE8iA_aM9E0lfg1Dmd>1
+R4
+S1
+R0
+w1756879377
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv
+!i122 3
+Z17 L0 5 34
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/multiplicador.sv|
+!i113 1
+R12
+R13
+R14
+vproblema_1
+R1
+R2
+!i10b 1
+!s100 ;ROSDJl]5YhiZ?ENQRJ3R1
+R3
+IPI@bOBL4]3YfDC3XKS<[70
+R4
+S1
+R0
+R5
+R6
+R7
+!i122 0
+L0 69 49
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+R14
+vrestador
+R1
+R2
+!i10b 1
+!s100 fViB@nPW`XY_^m16`EX5I0
+R3
+IgBo97fP@bmX<aJN=E::6d2
+R4
+S1
+R0
+w1756878403
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv
+!i122 2
+L0 7 34
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/restador.sv|
+!i113 1
+R12
+R13
+R14
+vsumador
+R1
+R2
+!i10b 1
+!s100 ?S91;a1Znf@WaB3FI@[6o2
+R3
+Ig>L[bLm6IKIMiYMOONE_G1
+R4
+S1
+R0
+w1756878513
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv
+!i122 1
+R17
+R8
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/suma.sv|
+!i113 1
+R12
+R13
+R14
+vtb_problema_1
+R1
+R15
+!i10b 1
+!s100 IP0U8C:>M]Ea:L9kP[zQg1
+R3
+IP>4o<293>WO;NE2AQLNQX2
+R4
+S1
+R0
+w1757465714
+8C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv
+FC:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv
+!i122 8
+L0 4 91
+R8
+r1
+!s85 0
+31
+R16
+!s107 C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1|C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_2/problema_1/tb_problema_1.sv|
+!i113 1
+R12
+R13
+R14
