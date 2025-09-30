@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Tue Sep 30 04:08:42 2025
+Analysis & Synthesis Status : Successful - Tue Sep 30 15:43:49 2025
 Quartus Prime Version : 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 Revision Name : problema_1
-Top-level Entity Name : vga_top
+Top-level Entity Name : top_mem
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 60
-Total pins : 31
+Total registers : 91
+Total pins : 44
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0

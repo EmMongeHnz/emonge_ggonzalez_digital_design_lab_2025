@@ -1,0 +1,106 @@
+// mem_fsm.sv — FSM (Propuesta 2), sin "inside" para compatibilidad Quartus.
+module mem_fsm(
+    input  logic clk, input logic rst,
+    // botones (ya con debounce + one_pulse)
+    input  logic btn_up, input logic btn_right, input logic btn_sel,
+    // tablero
+    input  logic two_open, input logic is_match,
+    input  logic [3:0] pairs_left,
+    // azar/tiempo
+    input  logic [15:0] rnd, input logic tick_1hz,
+
+    // control tablero
+    output logic do_shuffle, output logic do_close_nonmatch,
+    output logic req_open,  output logic [3:0] idx_to_open,
+
+    // UI
+    output logic [3:0] cursor_idx,
+    output logic [3:0] secs_left,
+    output logic       p1_turn,
+    output logic [3:0] p1_pairs, p2_pairs,
+    output logic       game_over
+);
+    typedef enum logic [3:0] {
+        S_INIT, S_ESJ1, S_CAP1_J1, S_CAP2_J1, S_VERIF_J1,
+        S_ESJ2, S_CAP1_J2, S_CAP2_J2, S_VERIF_J2, S_END
+    } st_t;
+
+    st_t st, nx;
+
+    // ——— Tiempo 15 s ———
+    logic [3:0] tmr;
+    function automatic logic in_time_states(input st_t s);
+        return (s==S_ESJ1)||(s==S_CAP1_J1)||(s==S_CAP2_J1)||(s==S_ESJ2)||(s==S_CAP1_J2)||(s==S_CAP2_J2);
+    endfunction
+
+    always_ff @(posedge clk) begin
+        if (rst || st==S_INIT) tmr <= 4'd15;
+        else if ( in_time_states(st) && tick_1hz && (tmr!=0) ) tmr <= tmr - 4'd1;
+        else if (st==S_VERIF_J1 || st==S_VERIF_J2) tmr <= 4'd15;
+    end
+    assign secs_left = tmr;
+
+    // ——— Cursor 4×4 ———
+    logic [3:0] cursor;
+    always_ff @(posedge clk) begin
+        if (rst || st==S_INIT) cursor <= 4'd0;
+        else if (btn_right)    cursor <= (cursor==4'd15)? 4'd0 : cursor+4'd1;
+        else if (btn_up)       cursor <= (cursor<4)? cursor+4'd12 : cursor-4'd4;
+    end
+    assign cursor_idx = cursor;
+
+    // ——— Turno y puntajes ———
+    logic j1_turn;
+    always_ff @(posedge clk) begin
+        if (rst || st==S_INIT) begin
+            j1_turn <= 1'b1; p1_pairs <= '0; p2_pairs <= '0;
+        end else if ((st==S_VERIF_J1) && two_open) begin
+            if (is_match) p1_pairs <= p1_pairs + 1; else j1_turn <= 1'b0;
+        end else if ((st==S_VERIF_J2) && two_open) begin
+            if (is_match) p2_pairs <= p2_pairs + 1; else j1_turn <= 1'b1;
+        end
+    end
+    assign p1_turn = j1_turn;
+
+    // ——— Elección (manual vs auto al timeout) ———
+    logic [3:0] auto_idx = rnd[3:0];
+    always_comb begin
+        idx_to_open = cursor;
+        if (tmr==0) idx_to_open = auto_idx;
+    end
+
+    // ——— Control tablero + transición ———
+    always_comb begin
+        do_shuffle        = 1'b0;
+        do_close_nonmatch = 1'b0;
+        req_open          = 1'b0;
+        nx = st;
+
+        unique case (st)
+            S_INIT:     begin do_shuffle=1;                     nx=S_ESJ1; end
+            S_ESJ1:     begin if (pairs_left==0) nx=S_END;
+                              else if (btn_sel || (tmr==0)) begin req_open=1; nx=S_CAP1_J1; end end
+            S_CAP1_J1:  begin if (btn_sel || (tmr==0)) begin req_open=1; nx=S_VERIF_J1; end end
+            S_VERIF_J1: begin if (two_open) begin
+                              if (is_match) nx=S_ESJ1;
+                              else begin do_close_nonmatch=1; nx=S_ESJ2; end
+                          end end
+            S_ESJ2:     begin if (pairs_left==0) nx=S_END;
+                              else if (btn_sel || (tmr==0)) begin req_open=1; nx=S_CAP1_J2; end end
+            S_CAP1_J2:  begin if (btn_sel || (tmr==0)) begin req_open=1; nx=S_VERIF_J2; end end
+            S_VERIF_J2: begin if (two_open) begin
+                              if (is_match) nx=S_ESJ2;
+                              else begin do_close_nonmatch=1; nx=S_ESJ1; end
+                          end end
+            S_END:      begin nx=S_END; end
+            default:    nx=S_INIT;
+        endcase
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst) st <= S_INIT;
+        else     st <= nx;
+    end
+
+    assign game_over = (pairs_left==0);
+endmodule
