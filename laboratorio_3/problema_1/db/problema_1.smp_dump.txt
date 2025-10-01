@@ -1,0 +1,7 @@
+
+State Machine - |top_mem|mem_fsm:u_fsm|st
+Name st.S_GAMEOVER st.S_EVAL st.S_WAIT_SECOND st.S_WAIT_FIRST 
+st.S_WAIT_FIRST 0 0 0 0 
+st.S_WAIT_SECOND 0 0 1 1 
+st.S_EVAL 0 1 0 1 
+st.S_GAMEOVER 1 0 0 1 
