@@ -1,44 +1,38 @@
-// mem_board.sv — Tablero 4×4 (8 parejas) — versión súper compatible Quartus 22.1std (Lite).
-// - Sin arreglos unpacked, sin funciones/tasks, sin part-select variables.
-// - do_shuffle: reinicia tablero a base fija 0..7,0..7 y cubre todas (sin aleatoriedad).
-// - Estados: 0=cubierta, 1=abierta, 2=removida.
-
 module mem_board(
     input  logic        clk,
     input  logic        rst,
 
-    // Control desde FSM
-    input  logic        do_shuffle,         // reinicia tablero base
-    input  logic        do_close_nonmatch,  // cierra abiertas si no son par
-    input  logic        req_open,           // abrir carta en idx (si está cubierta)
-    input  logic [3:0]  idx,                // 0..15
+    //Control FSM
+    input  logic        do_shuffle,         
+    input  logic        do_close_nonmatch,  
+    input  logic        req_open,           
+    input  logic [3:0]  idx,              
 
-    // Azar (no usado en esta versión, se mantiene por interfaz)
     input  logic [15:0] rnd,
 
-    // Observación
-    output logic [3:0]  sel_a,              // primera abierta (o F)
-    output logic [3:0]  sel_b,              // segunda abierta (o F)
-    output logic        two_open,           // hay dos abiertas
-    output logic        is_match,           // abiertas hacen pareja
-    output logic [16*4-1:0] tiles_id_flat,  // IDs empacados (16×4)
-    output logic [16*2-1:0] tiles_st_flat,  // ST empacados (16×2)
-    output logic [3:0]  pairs_left          // parejas restantes (0..8)
+
+    output logic [3:0]  sel_a,              
+    output logic [3:0]  sel_b,              
+    output logic        two_open,           
+    output logic        is_match,           
+    output logic [16*4-1:0] tiles_id_flat,  
+    output logic [16*2-1:0] tiles_st_flat,  
+    output logic [3:0]  pairs_left          
 );
 
-    // --------- Estado explícito por carta (IDs y estados) ---------
+    //estado explicito por carta
     logic [3:0] id0, id1, id2, id3, id4, id5, id6, id7,
                 id8, id9, id10,id11,id12,id13,id14,id15;
     logic [1:0] st0, st1, st2, st3, st4, st5, st6, st7,
                 st8, st9, st10,st11,st12,st13,st14,st15;
 
-    // IDs leídos para comparar
+    // ids leidos
     logic [3:0] ida, idb;
 
-    // ---------- Reset / Shuffle (reinicio a base fija) ----------
+    //shuffle
     always_ff @(posedge clk) begin
         if (rst) begin
-            // Base fija: 0..7, 0..7
+          
             id0<=4'd0; id1<=4'd1; id2<=4'd2; id3<=4'd3; id4<=4'd4; id5<=4'd5; id6<=4'd6; id7<=4'd7;
             id8<=4'd0; id9<=4'd1; id10<=4'd2; id11<=4'd3; id12<=4'd4; id13<=4'd5; id14<=4'd6; id15<=4'd7;
 
@@ -46,7 +40,7 @@ module mem_board(
             st8<=2'd0; st9<=2'd0; st10<=2'd0; st11<=2'd0; st12<=2'd0; st13<=2'd0; st14<=2'd0; st15<=2'd0;
         end else begin
             if (do_shuffle) begin
-                // Reinicia a base fija y cubre todas
+               
                 id0<=4'd0; id1<=4'd1; id2<=4'd2; id3<=4'd3; id4<=4'd4; id5<=4'd5; id6<=4'd6; id7<=4'd7;
                 id8<=4'd0; id9<=4'd1; id10<=4'd2; id11<=4'd3; id12<=4'd4; id13<=4'd5; id14<=4'd6; id15<=4'd7;
 
@@ -86,7 +80,7 @@ module mem_board(
                 endcase
             end
 
-            // Aplicar "removidas" si hubo par
+            
             if (two_open && is_match) begin
                 case (sel_a)
                     4'd0:  st0<=2'd2; 4'd1:  st1<=2'd2; 4'd2:  st2<=2'd2; 4'd3:  st3<=2'd2;
@@ -104,7 +98,7 @@ module mem_board(
         end
     end
 
-    // ---------- Encontrar dos abiertas (combinacional puro) ----------
+  
     always_comb begin
         sel_a    = 4'hF;
         sel_b    = 4'hF;
@@ -130,16 +124,16 @@ module mem_board(
         if (sel_a!=4'hF && sel_b!=4'hF) two_open = 1'b1;
     end
 
-    // ---------- ¿Hacen pareja? ----------
+    //verifica pareja
     always_comb begin
-        // ida = ID(sel_a)
+      
         case (sel_a)
             4'd0: ida=id0; 4'd1: ida=id1; 4'd2: ida=id2; 4'd3: ida=id3;
             4'd4: ida=id4; 4'd5: ida=id5; 4'd6: ida=id6; 4'd7: ida=id7;
             4'd8: ida=id8; 4'd9: ida=id9; 4'd10: ida=id10; 4'd11: ida=id11;
             4'd12: ida=id12;4'd13: ida=id13;4'd14: ida=id14; default: ida=id15;
         endcase
-        // idb = ID(sel_b)
+       
         case (sel_b)
             4'd0: idb=id0; 4'd1: idb=id1; 4'd2: idb=id2; 4'd3: idb=id3;
             4'd4: idb=id4; 4'd5: idb=id5; 4'd6: idb=id6; 4'd7: idb=id7;
@@ -149,10 +143,9 @@ module mem_board(
     end
     assign is_match = (two_open && (ida == idb));
 
-    // ---------- Parejas restantes (removidas/2) ----------
     always_comb begin
         integer removed_i;
-        integer cntpairs;   // parejas removidas = removed_i >> 1
+        integer cntpairs;  
 
         removed_i = 0;
         if (st0==2'd2)  removed_i=removed_i+1; if (st1==2'd2)  removed_i=removed_i+1;
@@ -164,9 +157,9 @@ module mem_board(
         if (st12==2'd2) removed_i=removed_i+1; if (st13==2'd2) removed_i=removed_i+1;
         if (st14==2'd2) removed_i=removed_i+1; if (st15==2'd2) removed_i=removed_i+1;
 
-        cntpairs = removed_i >> 1; // 0..8
+        cntpairs = removed_i >> 1; 
 
-        // pairs_left = 8 - cntpairs (evitamos [3:0] sobre expresiones)
+        
         case (cntpairs)
             0: pairs_left = 4'd8;
             1: pairs_left = 4'd7;
@@ -181,7 +174,7 @@ module mem_board(
         endcase
     end
 
-    // ---------- Buses planos (concatenación) ----------
+   
     assign tiles_id_flat = { id15,id14,id13,id12,id11,id10,id9,id8,
                              id7,id6,id5,id4,id3,id2,id1,id0 };
 

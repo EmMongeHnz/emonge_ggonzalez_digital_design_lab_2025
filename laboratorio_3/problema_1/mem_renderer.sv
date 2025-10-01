@@ -1,18 +1,12 @@
-// mem_renderer.sv — Renderizador 4×4 para juego de memoria en 640×480.
-// - 16 tiles de 160×120 px.
-// - Colores por ID, estados: 0=cubierta (gris), 1=abierta (color), 2=removida (negro).
-// - Resalta sel_a / sel_b con borde blanco.
-// - 100% combinacional, sin latches, compatible con Quartus 22.1std.
-
 module mem_renderer(
-    input  logic        clk_pix,        // no usado aquí (combinacional), se deja por interfaz
-    input  logic        rst,            // no usado aquí (combinacional), se deja por interfaz
+    input  logic        clk_pix,        
+    input  logic        rst,           
     input  logic        video_on,
     input  logic [11:0] x,
     input  logic [11:0] y,
 
-    input  logic [16*4-1:0] tiles_id_flat, // {id15,id14,...,id0}, cada uno 4 bits
-    input  logic [16*2-1:0] tiles_st_flat, // {st15,st14,...,st0}, cada uno 2 bits
+    input  logic [16*4-1:0] tiles_id_flat, 
+    input  logic [16*2-1:0] tiles_st_flat, 
     input  logic [3:0]      sel_a,
     input  logic [3:0]      sel_b,
     input  logic [3:0]      pairs_left,
@@ -22,14 +16,13 @@ module mem_renderer(
     output logic [7:0]      vga_b
 );
 
-    // ========= Parámetros de geometría =========
+    //geometria
     localparam int H_ACTIVE = 640;
     localparam int V_ACTIVE = 480;
-    localparam int TILE_W   = 160;  // 640 / 4
-    localparam int TILE_H   = 120;  // 480 / 4
+    localparam int TILE_W   = 160; 
+    localparam int TILE_H   = 120; 
 
-    // ========= Desempaquetado fijo (part-selects CONSTANTES) =========
-    // IDs (64 bits): [63:60]=id15 ... [3:0]=id0
+    // desempaquetado
     wire [3:0] id0  = tiles_id_flat[ 3: 0];
     wire [3:0] id1  = tiles_id_flat[ 7: 4];
     wire [3:0] id2  = tiles_id_flat[11: 8];
@@ -47,7 +40,7 @@ module mem_renderer(
     wire [3:0] id14 = tiles_id_flat[59:56];
     wire [3:0] id15 = tiles_id_flat[63:60];
 
-    // ST (32 bits): [31:30]=st15 ... [1:0]=st0
+ 
     wire [1:0] st0  = tiles_st_flat[ 1: 0];
     wire [1:0] st1  = tiles_st_flat[ 3: 2];
     wire [1:0] st2  = tiles_st_flat[ 5: 4];
@@ -65,27 +58,26 @@ module mem_renderer(
     wire [1:0] st14 = tiles_st_flat[29:28];
     wire [1:0] st15 = tiles_st_flat[31:30];
 
-    // ========= Señales intermedias =========
-    logic [1:0] row;       // 0..3
-    logic [1:0] col;       // 0..3
-    logic [3:0] tile_idx;  // 0..15
+    // señales intermedias
+    logic [1:0] row;       
+    logic [1:0] col;       
+    logic [3:0] tile_idx;  
 
-    logic [11:0] x0;       // x origen del tile
-    logic [11:0] y0;       // y origen del tile
-    logic [11:0] xi;       // x dentro del tile
-    logic [11:0] yi;       // y dentro del tile
+    logic [11:0] x0;       
+    logic [11:0] y0;       
+    logic [11:0] xi;      
+    logic [11:0] yi;      
 
-    logic        border;   // borde de 1 px
-    logic        highlight;// si es sel_a o sel_b
+    logic        border;   
+    logic        highlight;
 
-    logic [3:0]  id_sel;   // id del tile actual
-    logic [1:0]  st_sel;   // estado del tile actual
+    logic [3:0]  id_sel;   
+    logic [1:0]  st_sel;   
 
-    logic [7:0]  r, g, b;  // color calculado
+    logic [7:0]  r, g, b; 
 
-    // ========= Cálculo de fila/columna por umbrales (sin divisiones) =========
     always_comb begin
-        // Por defecto (evitar latches)
+        
         row = 2'd3;
         col = 2'd3;
 
@@ -100,17 +92,16 @@ module mem_renderer(
         else                  col = 2'd3;
     end
 
-    // Índice del tile: row*4 + col (sin multiplicadores genéricos)
     always_comb begin
         case (row)
-            2'd0: tile_idx = {2'b00, col};                  // 0..3
-            2'd1: tile_idx = 4'd4  + {2'b00, col};          // 4..7
-            2'd2: tile_idx = 4'd8  + {2'b00, col};          // 8..11
-            default: tile_idx = 4'd12 + {2'b00, col};       // 12..15
+            2'd0: tile_idx = {2'b00, col};                
+            2'd1: tile_idx = 4'd4  + {2'b00, col};         
+            2'd2: tile_idx = 4'd8  + {2'b00, col};          
+            default: tile_idx = 4'd12 + {2'b00, col};       
         endcase
     end
 
-    // Orígenes de tile (x0,y0) por col/row (sin multiplicación)
+    
     always_comb begin
         case (col)
             2'd0: x0 = 12'd0;
@@ -130,17 +121,17 @@ module mem_renderer(
         yi = y - y0;
     end
 
-    // Borde de 1 px
+
     always_comb begin
         border = (xi == 12'd0) || (xi == 12'd159) || (yi == 12'd0) || (yi == 12'd119);
     end
 
-    // ¿Tile seleccionado (abierto)? Resaltamos borde en blanco
+   
     always_comb begin
         highlight = (tile_idx == sel_a) || (tile_idx == sel_b);
     end
 
-    // Selección de ID/Estado del tile actual (case completo)
+    // seleccion id
     always_comb begin
         id_sel = 4'd0;
         st_sel = 2'd0;
@@ -164,56 +155,56 @@ module mem_renderer(
         endcase
     end
 
-    // Mapa de colores por ID (RGB 8-bit)
+    // mapa de colores
     function automatic void color_from_id(input logic [3:0] id, output logic [7:0] R, G, B);
         begin
             case (id)
-                4'd0: begin R=8'hFF; G=8'h20; B=8'h20; end // rojo
-                4'd1: begin R=8'h20; G=8'hFF; B=8'h20; end // verde
-                4'd2: begin R=8'h20; G=8'h20; B=8'hFF; end // azul
-                4'd3: begin R=8'hFF; G=8'hFF; B=8'h20; end // amarillo
-                4'd4: begin R=8'hFF; G=8'h40; B=8'hFF; end // magenta
-                4'd5: begin R=8'h20; G=8'hFF; B=8'hFF; end // cian
-                4'd6: begin R=8'hFF; G=8'hFF; B=8'hFF; end // blanco
-                default: begin R=8'hFF; G=8'hA0; B=8'h20; end // naranja
+                4'd0: begin R=8'hFF; G=8'h20; B=8'h20; end 
+                4'd1: begin R=8'h20; G=8'hFF; B=8'h20; end 
+                4'd2: begin R=8'h20; G=8'h20; B=8'hFF; end 
+                4'd3: begin R=8'hFF; G=8'hFF; B=8'h20; end 
+                4'd4: begin R=8'hFF; G=8'h40; B=8'hFF; end 
+                4'd5: begin R=8'h20; G=8'hFF; B=8'hFF; end 
+                4'd6: begin R=8'hFF; G=8'hFF; B=8'hFF; end 
+                default: begin R=8'hFF; G=8'hA0; B=8'h20; end 
             endcase
         end
     endfunction
 
-    // Color base del tile según estado
+    
     always_comb begin
-        // defaults (evita latches)
+     
         r = 8'h00; g = 8'h00; b = 8'h00;
 
         if (!video_on) begin
             r = 8'h00; g = 8'h00; b = 8'h00;
         end else begin
             unique case (st_sel)
-                2'd0: begin // cubierta
-                    r = 8'h40; g = 8'h40; b = 8'h40; // gris
+                2'd0: begin 
+                    r = 8'h40; g = 8'h40; b = 8'h40;
                 end
-                2'd1: begin // abierta
+                2'd1: begin 
                     color_from_id(id_sel, r, g, b);
                 end
                 default: begin // removida u otros
-                    r = 8'h00; g = 8'h00; b = 8'h00; // negro
+                    r = 8'h00; g = 8'h00; b = 8'h00;
                 end
             endcase
 
-            // Borde del tile
+   
             if (border) begin
-                // si es sel_a/sel_b → borde blanco
+     
                 if (highlight) begin
                     r = 8'hFF; g = 8'hFF; b = 8'hFF;
                 end else begin
-                    // borde estándar (gris claro)
+           
                     r = 8'hB0; g = 8'hB0; b = 8'hB0;
                 end
             end
         end
     end
 
-    // Salida registrada opcionalmente (aquí dejamos combinacional directo)
+
     always_comb begin
         vga_r = r;
         vga_g = g;

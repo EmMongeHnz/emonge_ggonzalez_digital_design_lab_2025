@@ -1,13 +1,10 @@
-// hex7.sv — Decoder 0..F a 7 segmentos (a..g).
-// Activo en bajo por defecto (DE10-Standard). Cambia ACTIVE_LOW=0 si tu display es activo en alto.
-
 module hex7 #(
     parameter bit ACTIVE_LOW = 1'b1
 )(
-    input  logic [3:0] d,      // dígito 0..15
-    output logic [6:0] seg     // {a,b,c,d,e,f,g}
+    input  logic [3:0] d,     
+    output logic [6:0] seg     
 );
-    logic [6:0] pat;           // patrón activo-en-alto intermedio
+    logic [6:0] pat;          
 
     always_comb begin
         unique case (d)
@@ -22,15 +19,15 @@ module hex7 #(
             4'h8: pat = 7'b1111111;
             4'h9: pat = 7'b1111011;
             4'hA: pat = 7'b1110111;
-            4'hB: pat = 7'b0011111; // b minúscula
+            4'hB: pat = 7'b0011111; 
             4'hC: pat = 7'b1001110;
-            4'hD: pat = 7'b0111101; // d minúscula
+            4'hD: pat = 7'b0111101; 
             4'hE: pat = 7'b1001111;
-            default: pat = 7'b1000111; // F
+            default: pat = 7'b1000111; 
         endcase
     end
 
-    // Ajuste de polaridad
+    
     always_comb begin
         if (ACTIVE_LOW) seg = ~pat; else seg = pat;
     end

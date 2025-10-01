@@ -1,38 +1,29 @@
-// mem_fsm.sv — FSM de turnos, puntajes y temporizador de 15 s con auto-elección.
-// Quartus 22.1std friendly: sin inicializaciones no-const y sin returns tempranos.
-//
-// Interfaz:
-// - evt_select + idx_in: intento manual de abrir carta
-// - Observa: two_open, is_match, pairs_left, tiles_st_flat
-// - Genera: req_open, do_close_nonmatch, idx_out
-// - Info: cur_player, sec_left, score_j1, score_j2, game_over
+
 
 module mem_fsm(
     input  logic        clk,
     input  logic        rst,
 
-    // UI
+    //UI
     input  logic        evt_select,
     input  logic [3:0]  idx_in,
 
-    // Estado del tablero
+    //Estado del tablero
     input  logic        two_open,
     input  logic        is_match,
     input  logic [3:0]  pairs_left,
-    input  logic [31:0] tiles_st_flat,   // {st15..st0} cada st=2b
+    input  logic [31:0] tiles_st_flat,   
 
-    // 1 Hz
     input  logic        tick_1hz,
 
-    // RNG
+
     input  logic [15:0] rnd,
 
-    // Acciones a tablero
+    //Acciones a tablero
     output logic        req_open,
     output logic        do_close_nonmatch,
     output logic [3:0]  idx_out,
 
-    // Info juego
     output logic        cur_player,    // 0=J1, 1=J2
     output logic [4:0]  sec_left,      // 15..0
     output logic [3:0]  score_j1,      // 0..8
@@ -40,21 +31,21 @@ module mem_fsm(
     output logic        game_over
 );
 
-    // ===== Estados =====
+
     typedef enum logic [1:0] { S_WAIT_FIRST, S_WAIT_SECOND, S_EVAL, S_GAMEOVER } state_t;
     state_t st, st_n;
 
-    // ===== Registros =====
+    //registros
     logic        cur_pl, cur_pl_n;
     logic [4:0]  timer, timer_n;
     logic [3:0]  sc1, sc2, sc1_n, sc2_n;
     logic [3:0]  idx_latched, idx_latched_n;
 
-    // Pulsos a tablero (combinacional → registrados en always_ff)
+    //input a tablero
     logic        req_open_n, close_n;
     logic [3:0]  idx_n;
 
-    // ----- Desempaquetar st0..st15 (anchos correctos 2 bits) -----
+  
     wire [1:0] st0  = tiles_st_flat[ 1: 0];
     wire [1:0] st1  = tiles_st_flat[ 3: 2];
     wire [1:0] st2  = tiles_st_flat[ 5: 4];
@@ -72,7 +63,7 @@ module mem_fsm(
     wire [1:0] st14 = tiles_st_flat[29:28];
     wire [1:0] st15 = tiles_st_flat[31:30];
 
-    // ----- ¿Está cubierta la carta k? -----
+    //verificacion carta disponible
     function automatic logic is_covered(input logic [3:0] k);
         logic cov;
         begin
@@ -99,7 +90,7 @@ module mem_fsm(
         end
     endfunction
 
-    // ----- Elección automática robusta (sin returns tempranos) -----
+    //elección automática
     function automatic logic [3:0] auto_pick_idx(input logic [3:0] seed);
         logic [3:0] k, res;
         logic       found;
@@ -115,13 +106,13 @@ module mem_fsm(
                 end
                 k = k + 4'd1;
             end
-            auto_pick_idx = res; // siempre asignado
+            auto_pick_idx = res; 
         end
     endfunction
 
-    // ===== COMBINACIONAL =====
+    
     always_comb begin
-        // defaults
+      
         st_n      = st;
         cur_pl_n  = cur_pl;
         timer_n   = timer;
@@ -131,15 +122,15 @@ module mem_fsm(
 
         req_open_n = 1'b0;
         close_n    = 1'b0;
-        idx_n      = idx_in;   // ← asignación en combinacional (no en la declaración)
+        idx_n      = idx_in;   
 
-        // fin del juego
+        //fin del juego
         if (pairs_left == 4'd0) begin
             st_n = S_GAMEOVER;
         end
 
         case (st)
-            // -------------------------------------------------
+            
             S_WAIT_FIRST: begin
                 if (tick_1hz && timer!=5'd0) timer_n = timer - 5'd1;
 
@@ -153,7 +144,7 @@ module mem_fsm(
                     end
                 end else if (timer==5'd0) begin
                     logic [3:0] auto_idx;
-                    auto_idx = auto_pick_idx(rnd[3:0]);   // ← NO en la declaración global
+                    auto_idx = auto_pick_idx(rnd[3:0]);  
                     idx_n    = auto_idx;
                     if (is_covered(idx_n)) begin
                         req_open_n     = 1'b1;
@@ -165,7 +156,7 @@ module mem_fsm(
                     end
                 end
             end
-            // -------------------------------------------------
+          
             S_WAIT_SECOND: begin
                 if (tick_1hz && timer!=5'd0) timer_n = timer - 5'd1;
 
@@ -187,34 +178,34 @@ module mem_fsm(
                     end
                 end
             end
-            // -------------------------------------------------
+        
             S_EVAL: begin
                 if (two_open && is_match) begin
                     if (cur_pl==1'b0) sc1_n = (sc1<4'd8)? (sc1+4'd1):sc1;
                     else               sc2_n = (sc2<4'd8)? (sc2+4'd1):sc2;
-                    timer_n = 5'd15;       // retiene turno
+                    timer_n = 5'd15;      
                     st_n    = S_WAIT_FIRST;
                 end else if (two_open && !is_match) begin
-                    close_n   = 1'b1;      // cerrar y ceder turno
+                    close_n   = 1'b1;     
                     cur_pl_n  = ~cur_pl;
                     timer_n   = 5'd15;
                     st_n      = S_WAIT_FIRST;
                 end else begin
-                    st_n = S_WAIT_FIRST;   // protección
+                    st_n = S_WAIT_FIRST;  
                 end
             end
-            // -------------------------------------------------
-            default: begin // S_GAMEOVER
+        
+            default: begin 
                 st_n = S_GAMEOVER;
             end
         endcase
     end
 
-    // ===== SECUENCIAL =====
+  
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             st           <= S_WAIT_FIRST;
-            cur_pl       <= 1'b0;    // J1 inicia
+            cur_pl       <= 1'b0;    
             timer        <= 5'd15;
             sc1          <= 4'd0;
             sc2          <= 4'd0;
@@ -231,14 +222,14 @@ module mem_fsm(
             sc2         <= sc2_n;
             idx_latched <= idx_latched_n;
 
-            // pulsos 1-ciclo
+           
             req_open         <= req_open_n;
             do_close_nonmatch<= close_n;
             idx_out          <= idx_n;
         end
     end
 
-    // ===== Salidas info =====
+   
     assign cur_player = cur_pl;
     assign sec_left   = timer;
     assign score_j1   = sc1;

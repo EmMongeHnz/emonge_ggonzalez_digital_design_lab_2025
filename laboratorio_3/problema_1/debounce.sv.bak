@@ -1,3 +1,4 @@
+// debounce.sv — filtro simple (~5–10 ms a 25 MHz)
 module debounce #(parameter int N = 20)(
   input  logic clk, input logic rst, input logic din, output logic dout
 );
@@ -11,13 +12,13 @@ module debounce #(parameter int N = 20)(
   assign dout = st;
 endmodule
 
-
+// one_pulse.sv — pulso de 1 ciclo a flanco ↑
 module one_pulse(input logic clk, input logic rst, input logic din, output logic pulse);
   logic d; always_ff @(posedge clk) if (rst) d<=0; else d<=din;
   assign pulse = din & ~d;
 endmodule
 
-
+// lfsr16.sv — taps 16,14,13,11
 module lfsr16(input logic clk, input logic rst, output logic [15:0] rnd);
   logic [15:0] s;
   always_ff @(posedge clk) begin
@@ -27,7 +28,7 @@ module lfsr16(input logic clk, input logic rst, output logic [15:0] rnd);
   assign rnd = s;
 endmodule
 
-
+// tickgen_1hz.sv — 1 Hz desde F_HZ (25e6 si ÷2 de 50 MHz)
 module tickgen_1hz #(parameter int F_HZ=25_000_000)(
   input logic clk, input logic rst, output logic tick_1hz
 );
@@ -39,7 +40,7 @@ module tickgen_1hz #(parameter int F_HZ=25_000_000)(
   end
 endmodule
 
-
+// sevenseg_hex.sv — activo en 0
 module sevenseg_hex(input logic [3:0] n, output logic [6:0] seg);
   always_comb case(n)
     4'h0: seg=7'b1000000; 4'h1: seg=7'b1111001; 4'h2: seg=7'b0100100; 4'h3: seg=7'b0110000;

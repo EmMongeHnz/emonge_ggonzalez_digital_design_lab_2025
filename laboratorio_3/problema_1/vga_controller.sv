@@ -1,18 +1,11 @@
-// vga_controller.sv
-// Wrapper de timing + generador de color (patrón de prueba opcional).
-// Compatible con Quartus (usa generate/endgenerate y función fuera del generate).
-
 module vga_controller #(
-    // Timing (por defecto 640x480@60)
     parameter int H_ACTIVE = 640, parameter int V_ACTIVE = 480,
     parameter int H_FP=16, parameter int H_SYNC=96, parameter int H_BP=48,
     parameter int V_FP=10, parameter int V_SYNC=2,  parameter int V_BP=33,
     parameter bit HS_POL=1'b0, parameter bit VS_POL=1'b0,
 
-    // Profundidad de color por canal (DE10-Standard → 10)
     parameter int N_COLOR_BITS = 10,
 
-    // 1 = usa patrón de prueba; 0 = pasa rgb_in
     parameter bit USE_TEST_PATTERN = 1'b1
 )(
     input  logic                           clk_pix,
@@ -33,7 +26,7 @@ module vga_controller #(
     output logic [11:0]                    y
 );
 
-    // --- Instancia de timing ---
+
     vga_timing #(
         .H_ACTIVE(H_ACTIVE), .V_ACTIVE(V_ACTIVE),
         .H_FP(H_FP), .H_SYNC(H_SYNC), .H_BP(H_BP),
@@ -50,10 +43,10 @@ module vga_controller #(
         .line_tick(), .frame_tick()
     );
 
-    // --- Colores internos ---
+  
     logic [N_COLOR_BITS-1:0] test_r, test_g, test_b;
 
-    // Función de gradiente (fuera del generate)
+
     function automatic [N_COLOR_BITS-1:0] grad(input [11:0] xx);
         int maxv; int val;
         begin
@@ -63,7 +56,7 @@ module vga_controller #(
         end
     endfunction
 
-    // --- Bloque generate compatible ---
+ 
     generate
         if (USE_TEST_PATTERN) begin : g_test
             localparam int BARS  = 8;
@@ -92,7 +85,7 @@ module vga_controller #(
                     3'd6: begin test_r = {N_COLOR_BITS{1'b1}}; test_g = {N_COLOR_BITS{1'b1}}; test_b = {N_COLOR_BITS{1'b1}}; end
                     default: begin test_r = '0; test_g = '0; test_b = '0; end
                 endcase
-                // gradiente suave en G
+      
                 test_g = (test_g >> 2) + (grad(x) >> 2);
             end
         end else begin : g_bypass
@@ -104,7 +97,7 @@ module vga_controller #(
         end
     endgenerate
 
-    // Salida: negro fuera de video_on
+   
     always_ff @(posedge clk_pix) begin
         if (rst) begin
             vga_r <= '0; vga_g <= '0; vga_b <= '0;

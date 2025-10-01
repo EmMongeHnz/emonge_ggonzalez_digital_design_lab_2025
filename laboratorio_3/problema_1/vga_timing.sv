@@ -1,23 +1,20 @@
-// vga_timing.sv
-// Generador de sincronismos VGA parametrizable.
-// Produce: hsync, vsync, video_on, x, y, line_tick, frame_tick.
 
 module vga_timing #(
-    // Resolución visible
+  
     parameter int H_ACTIVE = 640,
     parameter int V_ACTIVE = 480,
 
-    // Porciones horizontales (en píxeles)
+   
     parameter int H_FP  = 16,    // front porch
     parameter int H_SYNC= 96,    // pulso HS
     parameter int H_BP  = 48,    // back porch
 
-    // Porciones verticales (en líneas)
+  
     parameter int V_FP  = 10,    // front porch
     parameter int V_SYNC= 2,     // pulso VS
     parameter int V_BP  = 33,    // back porch
 
-    // Polaridades (1 = activo en alto, 0 = activo en bajo)
+  
     parameter bit HS_POL = 1'b0,
     parameter bit VS_POL = 1'b0
 )(
@@ -36,7 +33,7 @@ module vga_timing #(
     localparam int H_TOTAL = H_ACTIVE + H_FP + H_SYNC + H_BP;
     localparam int V_TOTAL = V_ACTIVE + V_FP + V_SYNC + V_BP;
 
-    // Contadores
+  
     always_ff @(posedge clk_pix) begin
         if (rst) begin
             x <= '0;
@@ -69,7 +66,7 @@ module vga_timing #(
         end
     end
 
-    // Zona visible
+    
     always_ff @(posedge clk_pix) begin
         if (rst) video_on <= 1'b0;
         else     video_on <= (x < H_ACTIVE) && (y < V_ACTIVE);

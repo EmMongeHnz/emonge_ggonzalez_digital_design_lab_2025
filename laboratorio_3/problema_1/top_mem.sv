@@ -1,11 +1,7 @@
-// top_mem.sv — Integración completa con turnos, puntajes, temporizador y 7 segmentos.
-// Usa hex7.sv para los displays (activo en bajo).
-// Incluye REMAP de segmentos porque los pines en la DE10-Standard están en orden GFEDCBA.
-
 module top_mem(
     input  logic        CLOCK_50,
-    input  logic [3:0]  KEY,         // activos en bajo: K3=reset
-    input  logic [9:0]  SW,          // SW[3:0]=índice
+    input  logic [3:0]  KEY,       
+    input  logic [9:0]  SW,        
 
     output logic        VGA_HS,
     output logic        VGA_VS,
@@ -16,19 +12,19 @@ module top_mem(
     output logic        VGA_BLANK_N,
     output logic        VGA_SYNC_N,
 
-    // 7-seg activos en bajo (DE10-Standard)
-    output logic [6:0]  HEX0,   // score J2
-    output logic [6:0]  HEX1,   // sec_left (hex)
-    output logic [6:0]  HEX2    // score J1
+
+    output logic [6:0]  HEX0,   
+    output logic [6:0]  HEX1,  
+    output logic [6:0]  HEX2    
 );
 
-    // ================== 1) Pixel clock y reset sync ==================
+    // pixel clock y reset asincronico
     logic clk_pix;
     always_ff @(posedge CLOCK_50) clk_pix <= ~clk_pix;
 
     logic rst_meta, rst_sync;
     always_ff @(posedge clk_pix) begin
-        rst_meta <= ~KEY[3];  // activo en bajo → interno activo en alto
+        rst_meta <= ~KEY[3];  
         rst_sync <= rst_meta;
     end
     wire rst_pix = rst_sync;
@@ -37,7 +33,7 @@ module top_mem(
     assign VGA_BLANK_N = 1'b1;
     assign VGA_SYNC_N  = 1'b0;
 
-    // ================== 2) Pulsos de UI ==================
+    
     logic k0_d, k1_d;
     always_ff @(posedge clk_pix or posedge rst_pix) begin
         if (rst_pix) begin
@@ -52,7 +48,7 @@ module top_mem(
 
     wire [3:0] idx_sel = SW[3:0];
 
-    // ================== 3) VGA timing ==================
+    //vga timing
     logic       video_on;
     logic [11:0] x, y;
     logic       hs_int, vs_int;
@@ -93,18 +89,18 @@ module top_mem(
         end
     end
 
-    // ================== 4) Tablero ==================
+    // tablero
     logic [3:0]  sel_a, sel_b;
     logic        two_open, is_match;
     logic [63:0] tiles_id_flat;
     logic [31:0] tiles_st_flat;
     logic [3:0]  pairs_left;
 
-    // Señales desde FSM → tablero
+    // señales fsm tablero
     logic        fsm_open, fsm_close;
     logic [3:0]  fsm_idx;
 
-    // RNG (LFSR16 que ya tienes en debounce.sv)
+ 
     logic [15:0] rnd16;
     lfsr16 u_rng (.clk(clk_pix), .rst(rst_pix), .rnd(rnd16));
 
@@ -128,9 +124,9 @@ module top_mem(
         .pairs_left        (pairs_left)
     );
 
-    // ================== 5) Tick 1 Hz desde clk_pix (~25 MHz) ==================
+    //tick
     logic tick_1hz;
-    localparam int DIV_1HZ = 25_000_000; // ajusta si tu pixel clock difiere
+    localparam int DIV_1HZ = 25_000_000; 
     logic [$clog2(DIV_1HZ)-1:0] divcnt;
     always_ff @(posedge clk_pix or posedge rst_pix) begin
         if (rst_pix) begin
@@ -147,7 +143,7 @@ module top_mem(
         end
     end
 
-    // ================== 6) FSM turnos/puntajes/tiempo ==================
+    //fsm turnos/puntajes
     logic        cur_player;
     logic [4:0]  sec_left;
     logic [3:0]  score_j1, score_j2;
@@ -179,7 +175,7 @@ module top_mem(
         .game_over      (game_over)
     );
 
-    // ================== 7) Renderer ==================
+    //renderer
     mem_renderer u_renderer (
         .clk_pix       (clk_pix),
         .rst           (rst_pix),
@@ -198,22 +194,20 @@ module top_mem(
         .vga_b         (rgb_b)
     );
 
-    // ================== 8) 7-Segmentos con REMAP GFEDCBA ==================
-    // Salidas del decoder (activo en bajo) en orden A..G
+    // 7 segmentos
     wire [6:0] seg_j1, seg_sec, seg_j2;
 
-    hex7 #(.ACTIVE_LOW(1)) u_hex2 (.d(score_j1[3:0]), .seg(seg_j1)); // J1
-    hex7 #(.ACTIVE_LOW(1)) u_hex1 (.d(sec_left[3:0]),  .seg(seg_sec)); // tiempo
-    hex7 #(.ACTIVE_LOW(1)) u_hex0 (.d(score_j2[3:0]), .seg(seg_j2)); // J2
-
-    // Mapeo a pines de la placa (GFEDCBA en los pines: HEXx[0]=g ... HEXx[6]=a)
-    assign HEX2[0] = seg_j1[6];  // g
-    assign HEX2[1] = seg_j1[5];  // f
-    assign HEX2[2] = seg_j1[4];  // e
-    assign HEX2[3] = seg_j1[3];  // d
-    assign HEX2[4] = seg_j1[2];  // c
-    assign HEX2[5] = seg_j1[1];  // b
-    assign HEX2[6] = seg_j1[0];  // a
+    hex7 #(.ACTIVE_LOW(1)) u_hex2 (.d(score_j1[3:0]), .seg(seg_j1)); 
+    hex7 #(.ACTIVE_LOW(1)) u_hex1 (.d(sec_left[3:0]),  .seg(seg_sec)); 
+    hex7 #(.ACTIVE_LOW(1)) u_hex0 (.d(score_j2[3:0]), .seg(seg_j2));
+    // Mapeo a pines de la placa
+    assign HEX2[0] = seg_j1[6];  
+    assign HEX2[1] = seg_j1[5];  
+    assign HEX2[2] = seg_j1[4];  
+    assign HEX2[3] = seg_j1[3]; 
+    assign HEX2[4] = seg_j1[2];  
+    assign HEX2[5] = seg_j1[1];  
+    assign HEX2[6] = seg_j1[0];  
 
     assign HEX1[0] = seg_sec[6];
     assign HEX1[1] = seg_sec[5];
