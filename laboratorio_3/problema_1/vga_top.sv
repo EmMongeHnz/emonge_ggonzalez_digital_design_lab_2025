@@ -22,7 +22,7 @@ module vga_top(
     assign VGA_BLANK_N = 1'b1; 
     assign VGA_SYNC_N  = 1'b0; 
 
- //reset asincrono
+ // reset
     logic r1, r2;
     always_ff @(posedge clk_pix or negedge RESET_N) begin
         if (!RESET_N) begin r1 <= 1'b1; r2 <= 1'b1; end
@@ -30,7 +30,7 @@ module vga_top(
     end
     wire rst_pix = r2;
 
-//señales de controlador
+// señales contr
     logic       video_on;
     logic [7:0] rgb_r_dummy, rgb_g_dummy, rgb_b_dummy; 
     logic       hs_int, vs_int;
@@ -79,7 +79,7 @@ module vga_top(
 
     wire frame_edge = (~vs_d) & vs_int;
 
-    //indice de color
+    // indice de color
     logic [2:0] color_idx;
     always_ff @(posedge clk_pix or negedge RESET_N) begin
         if (!RESET_N)          color_idx <= 3'd0;
@@ -90,14 +90,14 @@ module vga_top(
     logic [7:0] C_R, C_G, C_B;
     always_comb begin
         unique case (color_idx)
-            3'd0: begin C_R=8'hFF; C_G=8'h00; C_B=8'h00; end // Rojo
-            3'd1: begin C_R=8'h00; C_G=8'hFF; C_B=8'h00; end // Verde
-            3'd2: begin C_R=8'h00; C_G=8'h00; C_B=8'hFF; end // Azul
-            3'd3: begin C_R=8'hFF; C_G=8'hFF; C_B=8'h00; end // Amarillo
-            3'd4: begin C_R=8'hFF; C_G=8'h00; C_B=8'hFF; end // Magenta
-            3'd5: begin C_R=8'h00; C_G=8'hFF; C_B=8'hFF; end // Cian
-            3'd6: begin C_R=8'hFF; C_G=8'hFF; C_B=8'hFF; end // Blanco
-            default: begin C_R=8'h00; C_G=8'h00; C_B=8'h00; end // Negro
+            3'd0: begin C_R=8'hFF; C_G=8'h00; C_B=8'h00; end 
+            3'd1: begin C_R=8'h00; C_G=8'hFF; C_B=8'h00; end 
+            3'd2: begin C_R=8'h00; C_G=8'h00; C_B=8'hFF; end 
+            3'd3: begin C_R=8'hFF; C_G=8'hFF; C_B=8'h00; end 
+            3'd4: begin C_R=8'hFF; C_G=8'h00; C_B=8'hFF; end 
+            3'd5: begin C_R=8'h00; C_G=8'hFF; C_B=8'hFF; end 
+            3'd6: begin C_R=8'hFF; C_G=8'hFF; C_B=8'hFF; end 
+            default: begin C_R=8'h00; C_G=8'h00; C_B=8'h00; end 
         endcase
     end
 

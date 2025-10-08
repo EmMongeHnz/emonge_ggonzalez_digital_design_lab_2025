@@ -1,0 +1,89 @@
+`timescale 1ns/1ps
+
+module tb_fsm;
+
+  logic clk = 0;
+  always #5 clk = ~clk;
+  logic rst = 1;
+
+  logic evento_sel, time_expired, es_par;
+  logic [7:0] pares_restantes_i;
+  logic turn_j1, timer_start, timer_clear, rng_req;
+  logic capture_first, capture_second, eval_now, lock_pair, flip_back;
+  logic score_p1_inc, score_p2_inc, show_winner;
+
+  fsm #(.PAREJAS_TOTALES(3)) dut (
+    .clk, .rst,
+    .evento_sel, .time_expired, .es_par,
+    .pares_restantes_i,
+    .turn_j1, .timer_start, .timer_clear, .rng_req,
+    .capture_first, .capture_second, .eval_now, .lock_pair, .flip_back,
+    .score_p1_inc, .score_p2_inc, .show_winner
+  );
+
+  initial begin
+    pares_restantes_i = 3;
+    forever begin
+      @(posedge clk);
+      if (lock_pair && pares_restantes_i > 0)
+        pares_restantes_i <= pares_restantes_i - 1;
+    end
+  end
+
+  task pulse(input logic ref sig);
+    sig = 1; @(posedge clk); sig = 0;
+  endtask
+
+  initial begin
+    $display("TB start");
+    evento_sel   = 0;
+    time_expired = 0;
+    es_par       = 0;
+
+    repeat (3) @(posedge clk);
+    rst = 0;
+
+    pulse(evento_sel);
+    pulse(evento_sel);
+    es_par = 1;  @(posedge clk);
+    es_par = 0;  @(posedge clk);
+
+    pulse(evento_sel);
+    pulse(evento_sel);
+    es_par = 0;  @(posedge clk);
+    es_par = 0;  @(posedge clk);
+
+    pulse(time_expired);
+    es_par = 1;  @(posedge clk);
+    es_par = 0;  @(posedge clk);
+
+    pulse(time_expired);
+    es_par = 1;  @(posedge clk);
+    es_par = 0;  @(posedge clk);
+
+    pulse(time_expired);
+    es_par = 1;  @(posedge clk);
+    es_par = 0;  @(posedge clk);
+
+    repeat (5) @(posedge clk);
+
+    if (show_winner)
+      $display("OK: mostrar_ganador=1, pares_restantes=0");
+    else
+      $display("ERROR: no se alcanzó estado FIN");
+
+    $finish;
+  end
+
+  initial begin
+    $display("t turn pRest rng cap1 cap2 eval lock flip s1+ s2+ show");
+    forever begin
+      @(posedge clk);
+      $display("%0t %0b %0d %0b %0b %0b %0b %0b %0b %0b %0b %0b",
+        $time, turn_j1, pares_restantes_i,
+        rng_req, capture_first, capture_second, eval_now,
+        lock_pair, flip_back, score_p1_inc, score_p2_inc, show_winner);
+    end
+  end
+
+endmodule

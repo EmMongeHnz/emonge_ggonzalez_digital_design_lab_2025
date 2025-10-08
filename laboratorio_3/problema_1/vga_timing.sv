@@ -5,21 +5,20 @@ module vga_timing #(
     parameter int V_ACTIVE = 480,
 
    
-    parameter int H_FP  = 16,    // front porch
-    parameter int H_SYNC= 96,    // pulso HS
-    parameter int H_BP  = 48,    // back porch
-
+    parameter int H_FP  = 16,    
+    parameter int H_SYNC= 96,    
+    parameter int H_BP  = 48,    
   
-    parameter int V_FP  = 10,    // front porch
-    parameter int V_SYNC= 2,     // pulso VS
-    parameter int V_BP  = 33,    // back porch
+    parameter int V_FP  = 10,    
+    parameter int V_SYNC= 2,     
+    parameter int V_BP  = 33,    
 
   
     parameter bit HS_POL = 1'b0,
     parameter bit VS_POL = 1'b0
 )(
-    input  logic        clk_pix,     // pixel clock
-    input  logic        rst,         // reset síncrono a clk_pix (alto)
+    input  logic        clk_pix,    
+    input  logic        rst,        
 
     output logic        hsync,
     output logic        vsync,
@@ -51,14 +50,14 @@ module vga_timing #(
         end
     end
 
-    // Ventanas de sincronismo
+    // Ventanas de sincronizacion
     wire hsync_window = (x >= (H_ACTIVE + H_FP)) && (x < (H_ACTIVE + H_FP + H_SYNC));
     wire vsync_window = (y >= (V_ACTIVE + V_FP)) && (y < (V_ACTIVE + V_FP + V_SYNC));
 
     // Aplicar polaridad
     always_ff @(posedge clk_pix) begin
         if (rst) begin
-            hsync <= HS_POL ? 1'b0 : 1'b1; // estado inactivo
+            hsync <= HS_POL ? 1'b0 : 1'b1; 
             vsync <= VS_POL ? 1'b0 : 1'b1;
         end else begin
             hsync <= HS_POL ? hsync_window : ~hsync_window;

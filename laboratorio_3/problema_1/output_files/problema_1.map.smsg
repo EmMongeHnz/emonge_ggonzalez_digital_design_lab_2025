@@ -1,1 +1,1 @@
-Warning (10268): Verilog HDL information at tb_mem_fsm.sv(91): always construct contains both blocking and non-blocking assignments File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/tb_mem_fsm.sv Line: 91
+Warning (10268): Verilog HDL information at mem_shuffle.sv(47): always construct contains both blocking and non-blocking assignments File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 47

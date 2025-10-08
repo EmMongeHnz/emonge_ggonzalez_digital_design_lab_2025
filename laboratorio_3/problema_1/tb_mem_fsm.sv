@@ -1,9 +1,9 @@
 `timescale 1ns/1ps
 module tb_mem_fsm;
 
-  // reset
+  // ===== Reloj y reset =====
   logic clk = 1'b0;
-  always #5 clk = ~clk;         // 100 MHz
+  always #5 clk = ~clk;          // 100 MHz (10 ns)
 
   logic rst = 1'b1;
   initial begin
@@ -11,13 +11,13 @@ module tb_mem_fsm;
     rst = 1'b0;
   end
 
-  //params
-  localparam int N = 16;
+  // ===== Constantes del tablero =====
+  localparam int  N       = 16;
   localparam [1:0] ST_COV = 2'd0;   // cubierta
   localparam [1:0] ST_OPEN= 2'd1;   // abierta
   localparam [1:0] ST_REM = 2'd2;   // removida
 
-  //señales dut
+  // ===== Señales DUT =====
   logic        evt_select;
   logic [3:0]  idx_in;
 
@@ -37,7 +37,7 @@ module tb_mem_fsm;
   logic [3:0]  score_j1, score_j2;
   logic        game_over;
 
-  //instancia dut
+  // ===== Instancia DUT =====
   mem_fsm u_dut (
     .clk, .rst,
     .evt_select, .idx_in,
@@ -47,13 +47,13 @@ module tb_mem_fsm;
     .cur_player, .sec_left, .score_j1, .score_j2, .game_over
   );
 
- 
+  // ===== LFSR simple para rnd =====
   always_ff @(posedge clk or posedge rst) begin
     if (rst) rnd <= 16'h1ACE;
     else     rnd <= {rnd[14:0], rnd[15]^rnd[13]^rnd[12]^rnd[10]};
   end
 
-//modelo tablero
+  // ===== Modelo de tablero =====
   logic [1:0] st0, st1, st2, st3, st4, st5, st6, st7,
               st8, st9, st10, st11, st12, st13, st14, st15;
 
@@ -69,6 +69,7 @@ module tb_mem_fsm;
     tick_1hz   = 1'b0;
   end
 
+  // Empaquetado en el bus plano esperado por el DUT
   assign tiles_st_flat = {
     st15, st14, st13, st12, st11, st10, st9, st8,
     st7,  st6,  st5,  st4,  st3,  st2,  st1, st0
@@ -103,6 +104,7 @@ module tb_mem_fsm;
     endcase
   endfunction
 
+  // Detección de dos abiertas y match
   logic [3:0] sel_a, sel_b;
   always_comb begin
     sel_a = 4'hF; sel_b = 4'hF; two_open = 1'b0;
@@ -127,7 +129,7 @@ module tb_mem_fsm;
 
   assign is_match = (two_open && (rd_id(sel_a) == rd_id(sel_b)));
 
-  //parejas restantes
+  // Parejas restantes
   always_comb begin
     int rem; rem = 0;
     rem += (st0==ST_REM);  rem += (st1==ST_REM);  rem += (st2==ST_REM);  rem += (st3==ST_REM);
@@ -137,7 +139,7 @@ module tb_mem_fsm;
     pairs_left = 4'd8 - (rem >> 1);
   end
 
-
+  // Dinámica del tablero (abre solo con req_open)
   always_ff @(posedge clk or posedge rst) begin
     if (rst) begin
       st0<=ST_COV; st1<=ST_COV; st2<=ST_COV; st3<=ST_COV;
@@ -147,10 +149,7 @@ module tb_mem_fsm;
     end else begin
       if (req_open) begin
         if (rd_st(idx_out)==ST_COV) wr_st(idx_out, ST_OPEN);
-      end else if (evt_select) begin
-        if (rd_st(idx_in)==ST_COV)  wr_st(idx_in,  ST_OPEN);
       end
-
       if (do_close_nonmatch) begin
         if (st0==ST_OPEN) st0<=ST_COV;   if (st1==ST_OPEN) st1<=ST_COV;
         if (st2==ST_OPEN) st2<=ST_COV;   if (st3==ST_OPEN) st3<=ST_COV;
@@ -168,7 +167,7 @@ module tb_mem_fsm;
     end
   end
 
-  //utilidades
+  // ===== Utilidades =====
   task automatic one_sec_tick;
     tick_1hz = 1'b1; @(posedge clk);
     tick_1hz = 1'b0; @(posedge clk);
@@ -183,7 +182,6 @@ module tb_mem_fsm;
     evt_select = 1'b0; @(posedge clk);
   endtask
 
-
   task automatic wait_until_ref(ref logic cond, input int max_cyc, input string msg);
     int t; begin
       t = 0;
@@ -195,7 +193,7 @@ module tb_mem_fsm;
     end
   endtask
 
-//contador
+  // Contador de aperturas solicitadas por la FSM
   int opens_cnt;
   logic req_open_q;
   always_ff @(posedge clk or posedge rst) begin
@@ -208,6 +206,28 @@ module tb_mem_fsm;
     end
   end
 
+  // ---- Señales de espera ----
+  logic cond_removed_mid, cond_removed_last, cond_closed, cond_autoopen, cond_gameover, cond_score_up;
+  logic cond_two_opens;
+  int   opens_target;
+
+  logic [3:0] a_ref, b_ref;
+  logic [4:0] total_before;
+  logic [3:0] pairs_prev;
+  int         opens_base;
+
+  always_comb begin
+    cond_removed_mid = ((rd_st(a_ref)==ST_REM && rd_st(b_ref)==ST_REM) ||
+                        (pairs_left < pairs_prev) || game_over);
+    cond_removed_last= (pairs_left==0 || game_over ||
+                        ((score_j1 + score_j2) > total_before) ||
+                        (rd_st(a_ref)==ST_REM && rd_st(b_ref)==ST_REM));
+    cond_closed      = (two_open==1'b0);
+    cond_autoopen    = (opens_cnt > opens_base);
+    cond_gameover    = (game_over==1'b1);
+    cond_score_up    = ((score_j1 + score_j2) > total_before);
+    cond_two_opens   = (opens_cnt >= opens_target);
+  end
 
   function automatic bit find_next_pair(output logic [3:0] a, output logic [3:0] b);
     int i, j; bit ok; logic [3:0] ida, idb;
@@ -228,81 +248,51 @@ module tb_mem_fsm;
     return ok;
   endfunction
 
-  //flags
-  logic cond_match, cond_removed_mid, cond_removed_last, cond_closed, cond_autoopen, cond_gameover, cond_score_up;
-  logic [3:0] a_ref, b_ref;
-  logic [4:0] total_before;
-  logic [3:0] pairs_prev;
-  int         opens_base;
-
-  always_comb begin
-    cond_match       = (two_open && is_match);
-   
-    cond_removed_mid = ((rd_st(a_ref)==ST_REM && rd_st(b_ref)==ST_REM) ||
-                        (pairs_left < pairs_prev) || game_over);
-
-    cond_removed_last= (pairs_left==0 || game_over ||
-                        ((score_j1 + score_j2) > total_before) ||
-                        (rd_st(a_ref)==ST_REM && rd_st(b_ref)==ST_REM));
-    cond_closed      = (two_open==1'b0);
-    cond_autoopen    = (opens_cnt > opens_base);
-    cond_gameover    = (game_over==1'b1);
-    cond_score_up    = ((score_j1 + score_j2) > total_before);
-  end
-
-  //plan pruebas
+  // ===== Plan de pruebas =====
   initial begin : MAIN
     logic [3:0] a, b, x, y;
-    int k;
-    logic last_pair;
+    int         k;
+    logic       last_pair;
 
     @(negedge rst); @(posedge clk);
 
-
+    // TEST 1
     if (!find_next_pair(a,b)) $fatal(1, "No se encontró par inicial válido");
-
-    press_select(a);
-    press_select(b);
-
-    wait_until_ref(cond_match, 5000, "dos abiertas y match en TEST 1");
-
-    a_ref = a; b_ref = b;
-    pairs_prev   = pairs_left;
-    total_before = score_j1 + score_j2;
+    press_select(a); press_select(b);
+    opens_target = opens_cnt + 2;
+    wait_until_ref(cond_two_opens, 10000, "FSM no abrió dos cartas");
+    a_ref = a; b_ref = b; pairs_prev = pairs_left; total_before = score_j1 + score_j2;
     wait_until_ref(cond_removed_mid, 12000, "remover par inicial");
+    wait_until_ref(cond_score_up,     6000, "incremento de puntaje tras match inicial");
 
-    wait_until_ref(cond_score_up, 6000, "incremento de puntaje tras match inicial");
-
+    // TEST 2: fallo
     x = '1; y = '1;
-    for (k=0; k<16; k++) if (rd_st(k[3:0])!=ST_REM) begin x=k[3:0]; break; end
+    for (k=0; k<16; k++)  if (rd_st(k[3:0])!=ST_REM) begin x=k[3:0]; break; end
     for (k=15; k>=0; k--) if (rd_st(k[3:0])!=ST_REM && rd_id(k[3:0])!=rd_id(x)) begin y=k[3:0]; break; end
-
     if (x!=='1 && y!=='1) begin
       press_select(x); press_select(y);
-      wait_until_ref(cond_closed, 9000, "cierre tras fallo");
+      opens_target = opens_cnt + 2;
+      wait_until_ref(cond_two_opens, 10000, "FSM no abrió dos cartas (fallo)");
+      wait_until_ref(cond_closed,     9000, "cierre tras fallo");
     end
 
-
+    // TEST 3: auto-open por timeout
     opens_base = opens_cnt;
-    exhaust_timer(); // 15 ticks generados por el TB
-    wait_until_ref(cond_autoopen, 20000, "auto-open por timeout (esperando 15 ticks)");
+    begin int s; for (s=0; s<15; s=s+1) one_sec_tick(); end
+    wait_until_ref(cond_autoopen, 20000, "auto-open por timeout");
 
-
+    // TEST 4: terminar el juego
     while (pairs_left != 0) begin
       if (!find_next_pair(a,b)) $fatal(1, "Inconsistencia: no hay par pero pairs_left!=0");
-
       last_pair = (pairs_left == 4'd1);
-
-      press_select(a);
-      press_select(b);
-      a_ref       = a; b_ref = b;
-      pairs_prev  = pairs_left;
-      total_before= score_j1 + score_j2;
-
+      press_select(a); press_select(b);
+      opens_target = opens_cnt + 2;
+      wait_until_ref(cond_two_opens, 12000, "FSM no abrió dos cartas (cierre)");
+      a_ref = a; b_ref = b; pairs_prev = pairs_left; total_before = score_j1 + score_j2;
       if (last_pair)
         wait_until_ref(cond_removed_last, 40000, "remover último par / game_over");
       else
-        wait_until_ref(cond_removed_mid, 16000, $sformatf("remover par (%0d,%0d)", a, b));
+        wait_until_ref(cond_removed_mid,  16000, $sformatf("remover par (%0d,%0d)", a, b));
     end
 
     wait_until_ref(cond_gameover, 40000, "game_over");
@@ -310,15 +300,15 @@ module tb_mem_fsm;
     $finish;
   end
 
-
+  // ===== Trazas =====
   logic [3:0] s1q, s2q; logic cpq;
   always @(posedge clk) begin
-    if (req_open) $display("[%0t] req_open idx=%0d", $time, idx_out);
-    if (two_open) $display("[%0t] two_open is_match=%0b (sel_a=%0d sel_b=%0d)", $time, is_match, sel_a, sel_b);
+    if (req_open)          $display("[%0t] req_open idx=%0d", $time, idx_out);
+    if (two_open)          $display("[%0t] two_open is_match=%0b (sel_a=%0d sel_b=%0d)", $time, is_match, sel_a, sel_b);
     if (do_close_nonmatch) $display("[%0t] close_nonmatch", $time);
-    if (s1q!=score_j1) $display("[%0t] score_j1=%0d", $time, score_j1);
-    if (s2q!=score_j2) $display("[%0t] score_j2=%0d", $time, score_j2);
-    if (cpq!=cur_player) $display("[%0t] turno=%s sec_left=%0d", $time, cur_player?"J2":"J1", sec_left);
+    if (s1q!=score_j1)     $display("[%0t] score_j1=%0d", $time, score_j1);
+    if (s2q!=score_j2)     $display("[%0t] score_j2=%0d", $time, score_j2);
+    if (cpq!=cur_player)   $display("[%0t] turno=%s sec_left=%0d", $time, cur_player?"J2":"J1", sec_left);
     s1q<=score_j1; s2q<=score_j2; cpq<=cur_player;
   end
 
