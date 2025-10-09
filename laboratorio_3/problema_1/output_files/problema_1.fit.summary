@@ -1,12 +1,12 @@
-Fitter Status : Successful - Wed Oct  8 22:00:28 2025
+Fitter Status : Successful - Thu Oct  9 17:03:28 2025
 Quartus Prime Version : 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 Revision Name : problema_1
 Top-level Entity Name : top_mem
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 638 / 41,910 ( 2 % )
-Total registers : 425
+Logic utilization (in ALMs) : 712 / 41,910 ( 2 % )
+Total registers : 418
 Total pins : 65 / 499 ( 13 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 5,662,720 ( 0 % )

@@ -16,21 +16,21 @@ module top_mem(
   output logic [6:0]  HEX2
 );
 
-  
   logic clk_pix;
   always_ff @(posedge CLOCK_50 or negedge KEY[3]) begin
     if (!KEY[3]) clk_pix <= 1'b0;
     else         clk_pix <= ~clk_pix;
   end
+
   logic rst_meta, rst_pix;
   always_ff @(posedge clk_pix or negedge KEY[3]) begin
     if (!KEY[3]) begin rst_meta <= 1'b1; rst_pix <= 1'b1; end
     else begin rst_meta <= 1'b0; rst_pix <= rst_meta; end
   end
+
   assign VGA_CLK     = clk_pix;
   assign VGA_BLANK_N = 1'b1;
   assign VGA_SYNC_N  = 1'b0;
-
 
   logic sel_btn_db, sel_btn_pulse;
   debounce #(.N_CYCLES(50_000)) u_db (
@@ -43,30 +43,20 @@ module top_mem(
   );
   wire [3:0] idx_sw = SW[3:0];
 
-
   logic [15:0] rnd16;
   shift u_rng (.clk(clk_pix), .rst(rst_pix), .rnd(rnd16));
-
 
   localparam int unsigned FPIX_HZ = 25_000_000;
   logic [$clog2(FPIX_HZ)-1:0] div_cnt;
   logic tick_1hz;
   always_ff @(posedge clk_pix or posedge rst_pix) begin
-    if (rst_pix) begin
-      div_cnt  <= '0;
-      tick_1hz <= 1'b0;
-    end else begin
-      if (div_cnt == FPIX_HZ-1) begin
-        div_cnt  <= '0;
-        tick_1hz <= 1'b1;
-      end else begin
-        div_cnt  <= div_cnt + 1'b1;
-        tick_1hz <= 1'b0;
-      end
+    if (rst_pix) begin div_cnt <= '0; tick_1hz <= 1'b0; end
+    else begin
+      if (div_cnt == FPIX_HZ-1) begin div_cnt <= '0; tick_1hz <= 1'b1; end
+      else begin div_cnt <= div_cnt + 1'b1; tick_1hz <= 1'b0; end
     end
   end
 
-  // Controlador VGA 
   logic        video_on;
   logic [11:0] x, y;
   logic        hs_int, vs_int;
@@ -92,12 +82,12 @@ module top_mem(
     .video_on(video_on),
     .x       (x), .y(y)
   );
+
   always_ff @(posedge clk_pix or posedge rst_pix) begin
     if (rst_pix) begin VGA_HS <= 1'b1; VGA_VS <= 1'b1; end
     else begin VGA_HS <= hs_int; VGA_VS <= vs_int; end
   end
 
-  // Timer 
   logic        timer_start, timer_clear, time_expired;
   logic [4:0]  sec_left;
   turn_timer #(.START_FROM(15)) u_tmr (
@@ -109,18 +99,19 @@ module top_mem(
     .time_expired(time_expired)
   );
 
-  // FSM de juego 
   logic rng_req_fsm;
   logic capture_first_fsm, capture_second_fsm;
   logic eval_now_fsm, lock_pair_fsm, flip_back_fsm;
   logic turn_j1, show_winner;
   logic score_p1_inc, score_p2_inc;
   wire  evento_sel = sel_btn_pulse;
+
   localparam int N_TILES = 16;
-  logic es_par;
-  logic [7:0]               pairs_restantes_i;
-  logic [2*N_TILES-1:0]     tiles_st_flat;
-  logic [4*N_TILES-1:0]     tiles_id_flat_out;
+  logic         es_par;
+  logic [7:0]   pairs_restantes_i;
+  logic [2*N_TILES-1:0] tiles_st_flat;
+  logic [4*N_TILES-1:0] tiles_id_flat_out;
+
   fsm u_fsm (
     .clk(clk_pix), .rst(rst_pix),
     .evento_sel(evento_sel),
@@ -141,7 +132,6 @@ module top_mem(
     .show_winner(show_winner)
   );
 
-  // selector automatico de carta
   logic rng_req_auto, cap_first_auto, reveal_tick_auto, auto_busy;
   auto_reveal #(.DELAY_SECS(2)) u_auto (
     .clk         (clk_pix),
@@ -154,7 +144,6 @@ module top_mem(
     .auto_busy   (auto_busy)
   );
 
-  // barajar
   logic shuf_btn_db, shuf_btn_pulse;
   debounce #(.N_CYCLES(50_000)) u_db_shuf (
     .clk (clk_pix), .rst (rst_pix),
@@ -176,20 +165,20 @@ module top_mem(
     .tiles_id_flat(shuf_ids_flat)
   );
 
-  
-  wire block_fsm = time_expired | auto_busy | shuf_busy;
-  wire rng_req_to_board        = (block_fsm ? 1'b0 : rng_req_fsm)       | rng_req_auto;
-  wire capture_first_to_board  = (block_fsm ? 1'b0 : capture_first_fsm) | cap_first_auto;
-  wire capture_second_to_board = block_fsm ? 1'b0 : capture_second_fsm;
-  wire eval_now_to_board       = block_fsm ? 1'b0 : eval_now_fsm;
-  wire lock_pair_to_board      = block_fsm ? 1'b0 : lock_pair_fsm;
-  wire flip_back_to_board      = block_fsm ? 1'b0 : flip_back_fsm;
+  wire game_over          = show_winner | (pairs_restantes_i == 8'd0);
+  wire show_winner_render = game_over;
 
+  wire block_fsm = game_over | time_expired | auto_busy | shuf_busy;
 
-  wire reveal_tick_to_board = reveal_tick_auto;
-  wire load_ids_to_board    = shuf_done;
+  wire rng_req_to_board        = ((block_fsm ? 1'b0 : rng_req_fsm)       | (rng_req_auto    & ~game_over));
+  wire capture_first_to_board  = ((block_fsm ? 1'b0 : capture_first_fsm) | (cap_first_auto  & ~game_over));
+  wire capture_second_to_board =  (block_fsm ? 1'b0 : capture_second_fsm);
+  wire eval_now_to_board       =  (block_fsm ? 1'b0 : eval_now_fsm);
+  wire lock_pair_to_board      =  (block_fsm ? 1'b0 : lock_pair_fsm);
+  wire flip_back_to_board      =  (block_fsm ? 1'b0 : flip_back_fsm);
+  wire reveal_tick_to_board    =   reveal_tick_auto & ~game_over;
+  wire load_ids_to_board       =   shuf_done;
 
-  // Tablero 
   mem_board #(.N_TILES(N_TILES)) u_board (
     .clk(clk_pix), .rst(rst_pix),
     .sel_pulse(sel_btn_pulse),
@@ -201,7 +190,7 @@ module top_mem(
     .eval_now      (eval_now_to_board),
     .lock_pair     (lock_pair_to_board),
     .flip_back     (flip_back_to_board),
-    .reveal_tick(reveal_tick_to_board),
+    .reveal_tick   (reveal_tick_to_board),
     .load_ids        (load_ids_to_board),
     .tiles_id_flat_in(shuf_ids_flat),
     .es_par(es_par),
@@ -210,7 +199,6 @@ module top_mem(
     .tiles_id_flat_out(tiles_id_flat_out)
   );
 
-  // Marcadores de jugadores 
   logic [3:0] score_j1, score_j2;
   always_ff @(posedge clk_pix or posedge rst_pix) begin
     if (rst_pix) begin
@@ -225,7 +213,6 @@ module top_mem(
     end
   end
 
-  // Render del tablero a RGB
   mem_renderer #(.H_ACTIVE(640), .V_ACTIVE(480)) u_rend (
     .clk_pix(clk_pix),
     .rst    (rst_pix),
@@ -235,10 +222,12 @@ module top_mem(
     .turn_j1(turn_j1),
     .tiles_st_flat(tiles_st_flat[31:0]),
     .tiles_id_flat(tiles_id_flat_out),
+    .show_winner(show_winner_render),
+    .score_j1(score_j1),
+    .score_j2(score_j2),
     .rgb_r(rgb_r), .rgb_g(rgb_g), .rgb_b(rgb_b)
   );
 
-  // Displays 7 segmentos
   wire [6:0] seg_j1, seg_sec, seg_j2;
   hex7 #(.ACTIVE_LOW(1)) u_hex2 (.d(score_j1),      .seg(seg_j1));
   hex7 #(.ACTIVE_LOW(1)) u_hex1 (.d(sec_left[3:0]), .seg(seg_sec));
@@ -246,5 +235,4 @@ module top_mem(
   assign HEX2 = {seg_j1[0],seg_j1[1],seg_j1[2],seg_j1[3],seg_j1[4],seg_j1[5],seg_j1[6]};
   assign HEX1 = {seg_sec[0],seg_sec[1],seg_sec[2],seg_sec[3],seg_sec[4],seg_sec[5],seg_sec[6]};
   assign HEX0 = {seg_j2[0],seg_j2[1],seg_j2[2],seg_j2[3],seg_j2[4],seg_j2[5],seg_j2[6]};
-
 endmodule

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for problema_1
-Wed Oct  8 21:59:44 2025
+Thu Oct  9 17:02:44 2025
 Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 
 
@@ -34,13 +34,12 @@ Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
  26. Parameter Settings for User Entity Instance: hex7:u_hex1
  27. Parameter Settings for User Entity Instance: hex7:u_hex0
  28. Parameter Settings for Inferred Entity Instance: mem_shuffle:u_shuf|lpm_divide:Mod0
- 29. Port Connectivity Checks: "fsm:u_fsm"
- 30. Port Connectivity Checks: "turn_timer:u_tmr"
- 31. Port Connectivity Checks: "vga_controller:u_vga|vga_timing:u_timing"
- 32. Post-Synthesis Netlist Statistics for Top Partition
- 33. Elapsed Time Per Partition
- 34. Analysis & Synthesis Messages
- 35. Analysis & Synthesis Suppressed Messages
+ 29. Port Connectivity Checks: "turn_timer:u_tmr"
+ 30. Port Connectivity Checks: "vga_controller:u_vga|vga_timing:u_timing"
+ 31. Post-Synthesis Netlist Statistics for Top Partition
+ 32. Elapsed Time Per Partition
+ 33. Analysis & Synthesis Messages
+ 34. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -67,13 +66,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Oct  8 21:59:44 2025          ;
+; Analysis & Synthesis Status     ; Successful - Thu Oct  9 17:02:44 2025          ;
 ; Quartus Prime Version           ; 22.1std.0 Build 915 10/25/2022 SC Lite Edition ;
 ; Revision Name                   ; problema_1                                     ;
 ; Top-level Entity Name           ; top_mem                                        ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 385                                            ;
+; Total registers                 ; 389                                            ;
 ; Total pins                      ; 65                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
@@ -227,25 +226,25 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimate of Logic utilization (ALMs needed) ; 666     ;
+; Estimate of Logic utilization (ALMs needed) ; 734     ;
 ;                                             ;         ;
-; Combinational ALUT usage for logic          ; 1041    ;
-;     -- 7 input functions                    ; 6       ;
-;     -- 6 input functions                    ; 272     ;
-;     -- 5 input functions                    ; 146     ;
-;     -- 4 input functions                    ; 215     ;
-;     -- <=3 input functions                  ; 402     ;
+; Combinational ALUT usage for logic          ; 1160    ;
+;     -- 7 input functions                    ; 8       ;
+;     -- 6 input functions                    ; 288     ;
+;     -- 5 input functions                    ; 161     ;
+;     -- 4 input functions                    ; 216     ;
+;     -- <=3 input functions                  ; 487     ;
 ;                                             ;         ;
-; Dedicated logic registers                   ; 385     ;
+; Dedicated logic registers                   ; 389     ;
 ;                                             ;         ;
 ; I/O pins                                    ; 65      ;
 ;                                             ;         ;
 ; Total DSP Blocks                            ; 0       ;
 ;                                             ;         ;
 ; Maximum fan-out node                        ; clk_pix ;
-; Maximum fan-out                             ; 386     ;
-; Total fan-out                               ; 5784    ;
-; Average fan-out                             ; 3.72    ;
+; Maximum fan-out                             ; 390     ;
+; Total fan-out                               ; 6158    ;
+; Average fan-out                             ; 3.67    ;
 +---------------------------------------------+---------+
 
 
@@ -254,16 +253,16 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                         ; Entity Name         ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |top_mem                                  ; 1041 (49)           ; 385 (39)                  ; 0                 ; 0          ; 65   ; 0            ; |top_mem                                                                                                                    ; top_mem             ; work         ;
+; |top_mem                                  ; 1160 (51)           ; 389 (39)                  ; 0                 ; 0          ; 65   ; 0            ; |top_mem                                                                                                                    ; top_mem             ; work         ;
 ;    |auto_reveal:u_auto|                   ; 15 (15)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|auto_reveal:u_auto                                                                                                 ; auto_reveal         ; work         ;
 ;    |debounce:u_db_shuf|                   ; 24 (24)             ; 18 (18)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|debounce:u_db_shuf                                                                                                 ; debounce            ; work         ;
 ;    |debounce:u_db|                        ; 24 (24)             ; 18 (18)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|debounce:u_db                                                                                                      ; debounce            ; work         ;
-;    |fsm:u_fsm|                            ; 14 (14)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|fsm:u_fsm                                                                                                          ; fsm                 ; work         ;
+;    |fsm:u_fsm|                            ; 17 (17)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|fsm:u_fsm                                                                                                          ; fsm                 ; work         ;
 ;    |hex7:u_hex0|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|hex7:u_hex0                                                                                                        ; hex7                ; work         ;
 ;    |hex7:u_hex1|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|hex7:u_hex1                                                                                                        ; hex7                ; work         ;
 ;    |hex7:u_hex2|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|hex7:u_hex2                                                                                                        ; hex7                ; work         ;
-;    |mem_board:u_board|                    ; 310 (310)           ; 118 (118)                 ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_board:u_board                                                                                                  ; mem_board           ; work         ;
-;    |mem_renderer:u_rend|                  ; 149 (149)           ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_renderer:u_rend                                                                                                ; mem_renderer        ; work         ;
+;    |mem_board:u_board|                    ; 292 (292)           ; 118 (118)                 ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_board:u_board                                                                                                  ; mem_board           ; work         ;
+;    |mem_renderer:u_rend|                  ; 286 (286)           ; 23 (23)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_renderer:u_rend                                                                                                ; mem_renderer        ; work         ;
 ;    |mem_shuffle:u_shuf|                   ; 372 (175)           ; 73 (73)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_shuffle:u_shuf                                                                                                 ; mem_shuffle         ; work         ;
 ;       |lpm_divide:Mod0|                   ; 197 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_shuffle:u_shuf|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
 ;          |lpm_divide_p3m:auto_generated|  ; 197 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|mem_shuffle:u_shuf|lpm_divide:Mod0|lpm_divide_p3m:auto_generated                                                   ; lpm_divide_p3m      ; work         ;
@@ -272,9 +271,9 @@ https://fpgasoftware.intel.com/eula.
 ;    |one_pulse:u_op_shuf|                  ; 1 (1)               ; 2 (2)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|one_pulse:u_op_shuf                                                                                                ; one_pulse           ; work         ;
 ;    |one_pulse:u_op|                       ; 1 (1)               ; 2 (2)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|one_pulse:u_op                                                                                                     ; one_pulse           ; work         ;
 ;    |shift:u_rng|                          ; 9 (9)               ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|shift:u_rng                                                                                                        ; shift               ; work         ;
-;    |turn_timer:u_tmr|                     ; 10 (10)             ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|turn_timer:u_tmr                                                                                                   ; turn_timer          ; work         ;
-;    |vga_controller:u_vga|                 ; 42 (5)              ; 51 (24)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|vga_controller:u_vga                                                                                               ; vga_controller      ; work         ;
-;       |vga_timing:u_timing|               ; 37 (37)             ; 27 (27)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|vga_controller:u_vga|vga_timing:u_timing                                                                           ; vga_timing          ; work         ;
+;    |turn_timer:u_tmr|                     ; 9 (9)               ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |top_mem|turn_timer:u_tmr                                                                                                   ; turn_timer          ; work         ;
+;    |vga_controller:u_vga|                 ; 38 (2)              ; 51 (24)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|vga_controller:u_vga                                                                                               ; vga_controller      ; work         ;
+;       |vga_timing:u_timing|               ; 36 (36)             ; 27 (27)                   ; 0                 ; 0          ; 0    ; 0            ; |top_mem|vga_controller:u_vga|vga_timing:u_timing                                                                           ; vga_timing          ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -329,9 +328,6 @@ Encoding Type:  One-Hot
 +----------------------------------------+------------------------------------------+
 ; Register name                          ; Reason for Removal                       ;
 +----------------------------------------+------------------------------------------+
-; mem_renderer:u_rend|rgb_r[1]           ; Merged with mem_renderer:u_rend|rgb_r[0] ;
-; mem_renderer:u_rend|rgb_g[1]           ; Merged with mem_renderer:u_rend|rgb_g[0] ;
-; mem_renderer:u_rend|rgb_b[1]           ; Merged with mem_renderer:u_rend|rgb_b[0] ;
 ; mem_renderer:u_rend|rgb_b[7]           ; Merged with mem_renderer:u_rend|rgb_b[6] ;
 ; turn_timer:u_tmr|g_div.divcnt[24]      ; Merged with div_cnt[24]                  ;
 ; turn_timer:u_tmr|g_div.divcnt[22]      ; Merged with div_cnt[22]                  ;
@@ -358,8 +354,6 @@ Encoding Type:  One-Hot
 ; turn_timer:u_tmr|g_div.divcnt[8]       ; Merged with div_cnt[8]                   ;
 ; turn_timer:u_tmr|g_div.divcnt[7]       ; Merged with div_cnt[7]                   ;
 ; turn_timer:u_tmr|g_div.divcnt[6]       ; Merged with div_cnt[6]                   ;
-; mem_board:u_board|second_auto          ; Stuck at GND due to stuck port data_in   ;
-; mem_board:u_board|tick_tag_second      ; Lost fanout                              ;
 ; mem_shuffle:u_shuf|s~5                 ; Lost fanout                              ;
 ; mem_shuffle:u_shuf|s~6                 ; Lost fanout                              ;
 ; auto_reveal:u_auto|st~4                ; Lost fanout                              ;
@@ -368,8 +362,9 @@ Encoding Type:  One-Hot
 ; fsm:u_fsm|s~3                          ; Lost fanout                              ;
 ; fsm:u_fsm|s~4                          ; Lost fanout                              ;
 ; fsm:u_fsm|s~5                          ; Lost fanout                              ;
-; fsm:u_fsm|s.S_FIN                      ; Lost fanout                              ;
-; Total Number of Removed Registers = 40 ;                                          ;
+; mem_board:u_board|second_auto          ; Stuck at GND due to stuck port data_in   ;
+; mem_board:u_board|tick_tag_second      ; Lost fanout                              ;
+; Total Number of Removed Registers = 36 ;                                          ;
 +----------------------------------------+------------------------------------------+
 
 
@@ -388,12 +383,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 385   ;
-; Number of registers using Synchronous Clear  ; 165   ;
+; Total registers                              ; 389   ;
+; Number of registers using Synchronous Clear  ; 166   ;
 ; Number of registers using Synchronous Load   ; 2     ;
-; Number of registers using Asynchronous Clear ; 325   ;
+; Number of registers using Asynchronous Clear ; 328   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 189   ;
+; Number of registers using Clock Enable       ; 196   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -405,11 +400,11 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 ; VGA_HS~reg0                             ; 1       ;
 ; VGA_VS~reg0                             ; 1       ;
-; turn_timer:u_tmr|sec_left[0]            ; 10      ;
-; turn_timer:u_tmr|sec_left[1]            ; 9       ;
-; turn_timer:u_tmr|sec_left[2]            ; 9       ;
+; turn_timer:u_tmr|sec_left[0]            ; 12      ;
+; turn_timer:u_tmr|sec_left[1]            ; 11      ;
+; turn_timer:u_tmr|sec_left[2]            ; 10      ;
 ; turn_timer:u_tmr|sec_left[3]            ; 9       ;
-; rst_pix                                 ; 337     ;
+; rst_pix                                 ; 341     ;
 ; mem_board:u_board|tile_id[2][1]         ; 3       ;
 ; mem_board:u_board|tile_id[3][1]         ; 3       ;
 ; mem_board:u_board|tile_id[6][1]         ; 3       ;
@@ -435,10 +430,10 @@ Encoding Type:  One-Hot
 ; mem_board:u_board|tile_id[7][2]         ; 3       ;
 ; mem_board:u_board|tile_id[15][2]        ; 3       ;
 ; rst_meta                                ; 1       ;
+; mem_board:u_board|pairs_left[3]         ; 3       ;
 ; mem_shuffle:u_shuf|a[2][1]              ; 4       ;
 ; mem_shuffle:u_shuf|a[3][1]              ; 3       ;
 ; shift:u_rng|rnd[0]                      ; 9       ;
-; mem_board:u_board|pairs_left[3]         ; 3       ;
 ; mem_shuffle:u_shuf|a[6][1]              ; 3       ;
 ; mem_shuffle:u_shuf|a[7][1]              ; 3       ;
 ; mem_shuffle:u_shuf|a[10][1]             ; 4       ;
@@ -477,54 +472,56 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |top_mem|mem_board:u_board|pairs_left[0]               ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_b[3]                 ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|score_j2[3]                                   ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |top_mem|mem_board:u_board|pairs_left[7]               ;
+; 3:1                ; 22 bits   ; 44 LEs        ; 0 LEs                ; 44 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_g[7]                 ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|score_j2[0]                                   ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|score_j1[2]                                   ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_timing:u_timing|x[4] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |top_mem|debounce:u_db_shuf|cnt[9]                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |top_mem|debounce:u_db|cnt[10]                         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_g[0]                  ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_r[3]                  ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_g[3]                  ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_timing:u_timing|y[5] ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_g[5]                  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_b[0]                  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_b[1]                  ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_timing:u_timing|x[0] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |top_mem|debounce:u_db_shuf|cnt[8]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |top_mem|debounce:u_db|cnt[0]                          ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 0 LEs                ; 24 LEs                 ; Yes        ; |top_mem|vga_controller:u_vga|vga_timing:u_timing|y[6] ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_r[2]                  ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_b[3]                  ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_g[5]                  ;
 ; 5:1                ; 5 bits    ; 15 LEs        ; 5 LEs                ; 10 LEs                 ; Yes        ; |top_mem|mem_shuffle:u_shuf|i[0]                       ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[14][3]                   ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[13][1]                   ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[12][0]                   ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[11][2]                   ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[10][0]                   ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[9][3]                    ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[8][2]                    ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[12][1]                   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[11][3]                   ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[10][2]                   ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[9][1]                    ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[8][0]                    ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[6][0]                    ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[5][1]                    ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[4][0]                    ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[4][1]                    ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[3][3]                    ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[2][0]                    ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[1][2]                    ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[0][3]                    ;
-; 13:1               ; 2 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_b[6]                  ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[2][2]                    ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[1][3]                    ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[0][0]                    ;
+; 14:1               ; 2 bits    ; 18 LEs        ; 16 LEs               ; 2 LEs                  ; Yes        ; |top_mem|mem_renderer:u_rend|rgb_b[6]                  ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|turn_timer:u_tmr|sec_left[3]                  ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[15][2]                   ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[15][1]                   ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[14][1]                   ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[13][2]                   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[13][0]                   ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[11][1]                   ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[7][1]                    ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[6][2]                    ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[5][2]                    ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[3][1]                    ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |top_mem|vga_controller:u_vga|vga_g                    ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux2                      ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux14                     ;
-; 16:1               ; 4 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_shuffle:u_shuf|Mux7                       ;
-; 16:1               ; 6 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux3                        ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[5][0]                    ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top_mem|mem_shuffle:u_shuf|a[3][0]                    ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux0                      ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux9                      ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|g_pix                     ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_shuffle:u_shuf|Mux4                       ;
+; 16:1               ; 6 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux13                       ;
 ; 16:1               ; 6 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux6                        ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux1                        ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux10                       ;
-; 16:1               ; 5 bits    ; 50 LEs        ; 50 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux16                     ;
-; 16:1               ; 4 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_shuffle:u_shuf|Mux1                       ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |top_mem|auto_reveal:u_auto|Selector2                  ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux0                        ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_board:u_board|Mux11                       ;
+; 16:1               ; 5 bits    ; 50 LEs        ; 50 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|Mux17                     ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_shuffle:u_shuf|Mux2                       ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |top_mem|auto_reveal:u_auto|Selector0                  ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_mem|mem_renderer:u_rend|g_pix                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 
 
@@ -694,15 +691,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "fsm:u_fsm"                                                                                 ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                             ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; show_winner ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "turn_timer:u_tmr"                                                                          ;
 +-------------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port        ; Type   ; Severity ; Details                                                                             ;
@@ -726,32 +714,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 385                         ;
-;     CLR               ; 106                         ;
-;     CLR SCLR          ; 42                          ;
-;     ENA CLR           ; 101                         ;
+; arriav_ff             ; 389                         ;
+;     CLR               ; 108                         ;
+;     CLR SCLR          ; 36                          ;
+;     ENA CLR           ; 108                         ;
 ;     ENA CLR SCLR      ; 76                          ;
 ;     ENA SCLR          ; 12                          ;
-;     SCLR              ; 35                          ;
+;     SCLR              ; 42                          ;
 ;     SLD               ; 2                           ;
-;     plain             ; 11                          ;
-; arriav_lcell_comb     ; 1048                        ;
-;     arith             ; 248                         ;
-;         0 data inputs ; 26                          ;
-;         1 data inputs ; 136                         ;
-;         2 data inputs ; 14                          ;
+;     plain             ; 5                           ;
+; arriav_lcell_comb     ; 1167                        ;
+;     arith             ; 316                         ;
+;         0 data inputs ; 32                          ;
+;         1 data inputs ; 194                         ;
+;         2 data inputs ; 18                          ;
 ;         4 data inputs ; 40                          ;
 ;         5 data inputs ; 32                          ;
-;     extend            ; 6                           ;
-;         7 data inputs ; 6                           ;
-;     normal            ; 785                         ;
+;     extend            ; 8                           ;
+;         7 data inputs ; 8                           ;
+;     normal            ; 834                         ;
 ;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 20                          ;
-;         2 data inputs ; 72                          ;
-;         3 data inputs ; 133                         ;
-;         4 data inputs ; 172                         ;
-;         5 data inputs ; 114                         ;
-;         6 data inputs ; 272                         ;
+;         2 data inputs ; 85                          ;
+;         3 data inputs ; 137                         ;
+;         4 data inputs ; 173                         ;
+;         5 data inputs ; 129                         ;
+;         6 data inputs ; 288                         ;
 ;     shared            ; 9                           ;
 ;         0 data inputs ; 3                           ;
 ;         2 data inputs ; 3                           ;
@@ -759,7 +747,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; boundary_port         ; 65                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 32.00                       ;
-; Average LUT depth     ; 11.08                       ;
+; Average LUT depth     ; 11.06                       ;
 +-----------------------+-----------------------------+
 
 
@@ -768,7 +756,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -778,7 +766,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
-    Info: Processing started: Wed Oct  8 21:59:34 2025
+    Info: Processing started: Thu Oct  9 17:02:34 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off problema_1 -c problema_1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -815,27 +803,22 @@ Info (12021): Found 1 design units, including 1 entities, in source file auto_re
 Info (12127): Elaborating entity "top_mem" for the top level hierarchy
 Info (12128): Elaborating entity "debounce" for hierarchy "debounce:u_db" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 39
 Info (12128): Elaborating entity "one_pulse" for hierarchy "one_pulse:u_op" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 43
-Info (12128): Elaborating entity "shift" for hierarchy "shift:u_rng" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 48
-Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_controller:u_vga" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 94
+Info (12128): Elaborating entity "shift" for hierarchy "shift:u_rng" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 47
+Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_controller:u_vga" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 84
 Info (12128): Elaborating entity "vga_timing" for hierarchy "vga_controller:u_vga|vga_timing:u_timing" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/vga_controller.sv Line: 38
-Info (12128): Elaborating entity "turn_timer" for hierarchy "turn_timer:u_tmr" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 110
-Info (12128): Elaborating entity "fsm" for hierarchy "fsm:u_fsm" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 142
-Info (12128): Elaborating entity "auto_reveal" for hierarchy "auto_reveal:u_auto" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 155
-Info (12128): Elaborating entity "mem_shuffle" for hierarchy "mem_shuffle:u_shuf" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 177
+Info (12128): Elaborating entity "turn_timer" for hierarchy "turn_timer:u_tmr" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 100
+Info (12128): Elaborating entity "fsm" for hierarchy "fsm:u_fsm" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 133
+Info (12128): Elaborating entity "auto_reveal" for hierarchy "auto_reveal:u_auto" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 145
+Info (12128): Elaborating entity "mem_shuffle" for hierarchy "mem_shuffle:u_shuf" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 166
 Warning (10230): Verilog HDL assignment warning at mem_shuffle.sv(37): truncated value with size 16 to match size of target (4) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 37
 Warning (10230): Verilog HDL assignment warning at mem_shuffle.sv(46): truncated value with size 32 to match size of target (4) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 46
 Warning (10230): Verilog HDL assignment warning at mem_shuffle.sv(51): truncated value with size 32 to match size of target (4) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 51
 Warning (10230): Verilog HDL assignment warning at mem_shuffle.sv(52): truncated value with size 32 to match size of target (5) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 52
-Info (12128): Elaborating entity "mem_board" for hierarchy "mem_board:u_board" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 211
+Info (12128): Elaborating entity "mem_board" for hierarchy "mem_board:u_board" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 200
 Warning (10230): Verilog HDL assignment warning at mem_board.sv(72): truncated value with size 32 to match size of target (4) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_board.sv Line: 72
-Info (12128): Elaborating entity "mem_renderer" for hierarchy "mem_renderer:u_rend" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 239
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(50): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 50
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(51): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 51
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(52): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 52
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(56): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 56
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(57): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 57
-Warning (10230): Verilog HDL assignment warning at mem_renderer.sv(58): truncated value with size 32 to match size of target (12) File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 58
-Info (12128): Elaborating entity "hex7" for hierarchy "hex7:u_hex2" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 243
+Info (12128): Elaborating entity "mem_renderer" for hierarchy "mem_renderer:u_rend" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 229
+Info (10264): Verilog HDL Case Statement information at mem_renderer.sv(251): all case item expressions in this case statement are onehot File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_renderer.sv Line: 251
+Info (12128): Elaborating entity "hex7" for hierarchy "hex7:u_hex2" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 232
 Info (278001): Inferred 1 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "mem_shuffle:u_shuf|Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 37
 Info (12130): Elaborated megafunction instantiation "mem_shuffle:u_shuf|lpm_divide:Mod0" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/mem_shuffle.sv Line: 37
@@ -855,7 +838,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_BLANK_N" is stuck at VCC File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 12
     Warning (13410): Pin "VGA_SYNC_N" is stuck at GND File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 13
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 10 registers lost all their fanouts during netlist optimizations.
+Info (17049): 9 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/output_files/problema_1.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -867,15 +850,15 @@ Warning (21074): Design contains 7 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[7]" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 5
     Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 5
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/ggabr/OneDrive/Escritorio/emonge_ggonzalez_digital_design_lab_2025/laboratorio_3/problema_1/top_mem.sv Line: 5
-Info (21057): Implemented 1219 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1339 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 15 input pins
     Info (21059): Implemented 50 output pins
-    Info (21061): Implemented 1154 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 24 warnings
+    Info (21061): Implemented 1274 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
     Info: Peak virtual memory: 4873 megabytes
-    Info: Processing ended: Wed Oct  8 21:59:44 2025
+    Info: Processing ended: Thu Oct  9 17:02:44 2025
     Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Total CPU time (on all processors): 00:00:20
 
 
 +------------------------------------------+
