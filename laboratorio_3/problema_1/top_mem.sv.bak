@@ -1,0 +1,101 @@
+// top_mem.sv — integra VGA, FSM, tablero, renderer y periféricos
+module top_mem #(
+  parameter int NCB = 8
+)(
+  input  logic        CLOCK_50,
+  input  logic [3:0]  KEY,            // KEY[3]=RESET_N
+  output logic        VGA_HS, VGA_VS,
+  output logic [NCB-1:0] VGA_R, VGA_G, VGA_B,
+  output logic        VGA_CLK, VGA_BLANK_N, VGA_SYNC_N,
+  output logic [6:0]  HEX0, HEX1, HEX2, HEX3, HEX4, HEX5
+);
+  // === pixel clock ÷2 (25 MHz aprox) ===
+  logic clk_pix; always_ff @(posedge CLOCK_50) clk_pix <= ~clk_pix;
+  assign VGA_CLK     = clk_pix;
+  assign VGA_BLANK_N = 1'b1; // DAC enable
+  assign VGA_SYNC_N  = 1'b0; // no sync-on-green
+
+  // reset sinc (activo alto para tus módulos)
+  logic rst_n = KEY[3];
+  logic r1,r2; always_ff @(posedge clk_pix or negedge rst_n) begin
+    if (!rst_n) begin r1<=1; r2<=1; end else begin r1<=0; r2<=r1; end
+  end
+  wire rst = r2;
+
+  // botones: KEY activo en 0 → invertir, luego debounce y one-pulse
+  logic db_sel,db_up,db_rt, p_sel,p_up,p_rt;
+  debounce udb0(.clk(clk_pix), .rst(rst), .din(~KEY[0]), .dout(db_sel));
+  debounce udb1(.clk(clk_pix), .rst(rst), .din(~KEY[2]), .dout(db_up));
+  debounce udb2(.clk(clk_pix), .rst(rst), .din(~KEY[1]), .dout(db_rt));
+  one_pulse uop0(.clk(clk_pix), .rst(rst), .din(db_sel), .pulse(p_sel));
+  one_pulse uop1(.clk(clk_pix), .rst(rst), .din(db_up),  .pulse(p_up));
+  one_pulse uop2(.clk(clk_pix), .rst(rst), .din(db_rt),  .pulse(p_rt));
+
+  // VGA timing (tu wrapper)
+  logic video_on; logic [11:0] x,y;
+  vga_controller #(
+    .H_ACTIVE(640), .V_ACTIVE(480),
+    .H_FP(16), .H_SYNC(96), .H_BP(48),
+    .V_FP(10), .V_SYNC(2),  .V_BP(33),
+    .HS_POL(1'b0), .VS_POL(1'b0),
+    .N_COLOR_BITS(NCB),
+    .USE_TEST_PATTERN(1'b0)
+  ) u_vga (
+    .clk_pix(clk_pix), .rst(rst),
+    .rgb_in_r(VGA_R), .rgb_in_g(VGA_G), .rgb_in_b(VGA_B),
+    .hsync(VGA_HS), .vsync(VGA_VS),
+    .vga_r(), .vga_g(), .vga_b(),
+    .video_on(video_on), .x(x), .y(y)
+  );
+
+  // azar y 1 Hz
+  logic [15:0] rnd; lfsr16 urnd(.clk(clk_pix), .rst(rst), .rnd(rnd));
+  logic tick1; tickgen_1hz #(.F_HZ(25_000_000)) u1hz(.clk(clk_pix), .rst(rst), .tick_1hz(tick1));
+
+  // tablero
+  logic        do_shuffle, do_close, req_open;
+  logic [3:0]  idx_open, sel_a, sel_b, pairs_left;
+  logic        two_open, is_match;
+  logic [3:0]  ids [0:15]; logic [1:0] sts [0:15];
+
+  mem_board ub(
+    .clk(clk_pix), .rst(rst),
+    .do_shuffle(do_shuffle), .do_close_nonmatch(do_close),
+    .req_open(req_open), .idx(idx_open), .rnd(rnd),
+    .sel_a(sel_a), .sel_b(sel_b), .two_open(two_open), .is_match(is_match),
+    .id(ids), .st(sts), .pairs_left(pairs_left)
+  );
+
+  // fsm
+  logic [3:0] cursor, secs; logic p1_turn; logic [3:0] p1p,p2p; logic over;
+  mem_fsm uf(
+    .clk(clk_pix), .rst(rst),
+    .btn_up(p_up), .btn_right(p_rt), .btn_sel(p_sel),
+    .two_open(two_open), .is_match(is_match), .pairs_left(pairs_left),
+    .rnd(rnd), .tick_1hz(tick1),
+    .do_shuffle(do_shuffle), .do_close_nonmatch(do_close),
+    .req_open(req_open), .idx_to_open(idx_open),
+    .cursor_idx(cursor), .secs_left(secs),
+    .p1_turn(p1_turn), .p1_pairs(p1p), .p2_pairs(p2p),
+    .game_over(over)
+  );
+
+  // renderer
+  mem_renderer #(.NCB(NCB)) ur(
+    .clk_pix(clk_pix), .rst(rst),
+    .x(x), .y(y), .video_on(video_on),
+    .id(ids), .st(sts), .cursor_idx(cursor),
+    .p1_turn(p1_turn), .p1_pairs(p1p), .p2_pairs(p2p),
+    .secs_left(secs), .game_over(over),
+    .R(VGA_R), .G(VGA_G), .B(VGA_B)
+  );
+
+  // 7 segmentos: HEX0-HEX1 = tiempo (ss), HEX2 = p1, HEX3 = p2; HEX4-HEX5 apagados
+  sevenseg_hex h0(.n(secs%10), .seg(HEX0));
+  sevenseg_hex h1(.n(secs/10), .seg(HEX1));
+  sevenseg_hex h2(.n(p1p),     .seg(HEX2));
+  sevenseg_hex h3(.n(p2p),     .seg(HEX3));
+  assign HEX4 = 7'b1111111;
+  assign HEX5 = 7'b1111111;
+
+endmodule

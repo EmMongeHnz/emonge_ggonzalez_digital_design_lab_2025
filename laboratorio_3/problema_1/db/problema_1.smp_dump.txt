@@ -1,0 +1,27 @@
+
+State Machine - |top_mem|mem_shuffle:u_shuf|s
+Name s.S_DONE s.S_SHUF s.S_INIT s.S_IDLE 
+s.S_IDLE 0 0 0 0 
+s.S_INIT 0 0 1 1 
+s.S_SHUF 0 1 0 1 
+s.S_DONE 1 0 0 1 
+
+State Machine - |top_mem|auto_reveal:u_auto|st
+Name st.AR_REVEAL st.AR_WAIT st.AR_PULSE st.AR_IDLE 
+st.AR_IDLE 0 0 0 0 
+st.AR_PULSE 0 0 1 1 
+st.AR_WAIT 0 1 0 1 
+st.AR_REVEAL 1 0 0 1 
+
+State Machine - |top_mem|fsm:u_fsm|s
+Name s.S_FIN s.S_TURNO_J2_EVAL s.S_TURNO_J2_CAP2 s.S_TURNO_J2_CAP1 s.S_TURNO_J2_ESPERA s.S_TURNO_J1_EVAL s.S_TURNO_J1_CAP2 s.S_TURNO_J1_CAP1 s.S_TURNO_J1_ESPERA s.S_INIT 
+s.S_INIT 0 0 0 0 0 0 0 0 0 0 
+s.S_TURNO_J1_ESPERA 0 0 0 0 0 0 0 0 1 1 
+s.S_TURNO_J1_CAP1 0 0 0 0 0 0 0 1 0 1 
+s.S_TURNO_J1_CAP2 0 0 0 0 0 0 1 0 0 1 
+s.S_TURNO_J1_EVAL 0 0 0 0 0 1 0 0 0 1 
+s.S_TURNO_J2_ESPERA 0 0 0 0 1 0 0 0 0 1 
+s.S_TURNO_J2_CAP1 0 0 0 1 0 0 0 0 0 1 
+s.S_TURNO_J2_CAP2 0 0 1 0 0 0 0 0 0 1 
+s.S_TURNO_J2_EVAL 0 1 0 0 0 0 0 0 0 1 
+s.S_FIN 1 0 0 0 0 0 0 0 0 1 

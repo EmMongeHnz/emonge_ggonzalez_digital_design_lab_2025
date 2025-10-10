@@ -1,0 +1,59 @@
+// mem_renderer.sv — pinta casillas, cursor, barra de turno y “ganador”
+module mem_renderer #(
+  parameter int NCB=8
+)(
+  input  logic                 clk_pix, input logic rst,
+  input  logic [11:0]          x, y, input logic video_on,
+  input  logic [3:0]           id [0:15],
+  input  logic [1:0]           st [0:15],
+  input  logic [3:0]           cursor_idx,
+  input  logic                 p1_turn, input logic [3:0] p1_pairs, p2_pairs,
+  input  logic [3:0]           secs_left, input logic game_over,
+  output logic [NCB-1:0]       R, G, B
+);
+  localparam int CW=120, CH=100, OX=80, OY=40;
+  localparam [7:0] BG_R=8'h08, BG_G=8'h10, BG_B=8'h18;
+  localparam [7:0] C0_R=8'h20, C0_G=8'h50, C0_B=8'h90;  // cubierta
+  localparam [7:0] C1_R=8'hFF, C1_G=8'hE0, C1_B=8'h80;  // abierta
+  localparam [7:0] C2_R=8'h20, C2_G=8'h20, C2_B=8'h20;  // removida
+  localparam [7:0] CUR_R=8'hFF, CUR_G=8'h00, CUR_B=8'h00;
+
+  function automatic int idx_at(input int xx,yy);
+    int cx=(xx-OX)/CW, cy=(yy-OY)/CH;
+    if (xx<OX||yy<OY||cx>3||cy>3) return -1;
+    return cy*4+cx;
+  endfunction
+
+  int idxi;
+  always_comb begin
+    logic [7:0] r=BG_R,g=BG_G,b=BG_B;
+    if (video_on) begin
+      idxi=idx_at(x,y);
+      if (idxi>=0) begin
+        case (st[idxi])
+          2'd0: begin r=C0_R; g=C0_G; b=C0_B; end
+          2'd1: begin r=C1_R; g=C1_G; b=C1_B; end
+          2'd2: begin r=C2_R; g=C2_G; b=C2_B; end
+        endcase
+        // borde de cursor
+        if (idxi==cursor_idx) begin
+          if ((x%CW)<4 || (y%CH)<4 || (x%CW)>(CW-5) || (y%CH)>(CH-5)) begin
+            r=CUR_R; g=CUR_G; b=CUR_B;
+          end
+        end
+      end
+      // barra de turno en la parte superior
+      if (y<20) begin
+        if (p1_turn) begin r=8'h40; g=8'hFF; b=8'h40; end
+        else         begin r=8'h40; g=8'h40; b=8'hFF; end
+      end
+      // franja “ganador” centrada
+      if (game_over && y>220 && y<260) begin
+        if (p1_pairs>p2_pairs) begin r=8'hFF; g=8'hD0; b=8'h00; end
+        else if (p2_pairs>p1_pairs) begin r=8'h00; g=8'hD0; b=8'hFF; end
+        else begin r=8'hFF; g=8'hFF; b=8'hFF; end
+      end
+    end
+    R=r; G=g; B=b;
+  end
+endmodule

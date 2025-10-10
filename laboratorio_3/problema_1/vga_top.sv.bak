@@ -1,0 +1,56 @@
+// de10_vga_top.sv
+// Top mínimo para la DE10-Standard.
+// *** PARA PRODUCCIÓN: reemplaza el divisor por un PLL a 25.175 MHz ***
+
+module de10_vga_top (
+    input  logic        CLOCK_50,   // Reloj de 50 MHz de la placa
+    input  logic        RESET_N,    // Reset activo en bajo (botón KEY0 o similar)
+
+    output logic        VGA_HS,
+    output logic        VGA_VS,
+    output logic [9:0]  VGA_R,
+    output logic [9:0]  VGA_G,
+    output logic [9:0]  VGA_B
+);
+
+    // Sincroniza y pone activo-alto
+    logic rst;
+    always_ff @(posedge CLOCK_50 or negedge RESET_N) begin
+        if (!RESET_N) rst <= 1'b1;
+        else          rst <= 1'b0;
+    end
+
+    // *** Pixel clock ~25 MHz por división simple (para pruebas) ***
+    // MEJOR: usar PLL a 25.175 MHz → altsyncram/ALTPLL (IP de Intel)
+    logic clk_pix;
+    always_ff @(posedge CLOCK_50) begin
+        clk_pix <= ~clk_pix; // divide-by-2 → 25 MHz
+    end
+
+    // Instancia del controlador VGA con 10 bits por canal
+    localparam int N = 10;
+
+    // 640x480@60 parámetros estándar
+    vga_controller #(
+        .H_ACTIVE(640), .V_ACTIVE(480),
+        .H_FP(16), .H_SYNC(96), .H_BP(48),
+        .V_FP(10), .V_SYNC(2),  .V_BP(33),
+        .HS_POL(1'b0), .VS_POL(1'b0),
+        .N_COLOR_BITS(N),
+        .USE_TEST_PATTERN(1'b1)  // Arranca con patrón de prueba
+    ) u_vga (
+        .clk_pix (clk_pix),
+        .rst     (rst),
+
+        .rgb_in_r('0), .rgb_in_g('0), .rgb_in_b('0), // no usados con patrón
+
+        .hsync (VGA_HS),
+        .vsync (VGA_VS),
+        .vga_r (VGA_R),
+        .vga_g (VGA_G),
+        .vga_b (VGA_B),
+
+        .video_on(), .x(), .y()
+    );
+
+endmodule
